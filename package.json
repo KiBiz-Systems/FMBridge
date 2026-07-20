@@ -8,9 +8,9 @@
   "engines": { "vscode": "^1.80.0" },
   "categories": ["Programming Languages", "Other"],
   "keywords": ["filemaker", "fmscript", "claris", "fmp", "fmxmlsnippet"],
-  "repository": { "type": "git", "url": "https://github.com/kibiz/fm-bridge.git" },
-  "bugs": { "url": "https://github.com/kibiz/fm-bridge/issues" },
-  "homepage": "https://github.com/kibiz/fm-bridge#readme",
+  "repository": { "type": "git", "url": "https://github.com/KiBiz-Systems/FMBridge.git" },
+  "bugs": { "url": "https://github.com/KiBiz-Systems/FMBridge/issues" },
+  "homepage": "https://github.com/KiBiz-Systems/FMBridge#readme",
   "main": "./extension.js",
   "scripts": {
     "test": "node test/roundtrip.test.js",
