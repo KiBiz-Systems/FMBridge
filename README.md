@@ -1,8 +1,20 @@
 # FM Bridge
 
 Local VS Code extension bridging FileMaker Pro's clipboard XML and readable `.fmscript` text.
-No server, no license, Windows-first. Originally built for the IDF Search project but generic —
-this folder is a standalone project, built/tested/deployed independently of any FileMaker solution.
+No server, no account, no telemetry. Everything runs locally.
+
+## Install
+
+Open the Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`), search **FM Bridge** or
+**FileMaker**, and click **Install**. Available on both the
+[VS Code Marketplace](https://marketplace.visualstudio.com/) (VS Code) and
+[Open VSX](https://open-vsx.org/) (Cursor, VSCodium, Windsurf, Antigravity, and other forks).
+
+Coverage for ~220 script steps is bundled in, so it works immediately with no setup.
+
+> **Platform note:** full clipboard reading (FileMaker's private clipboard formats) is
+> **Windows-only** — it shells out to PowerShell. On macOS/Linux, `Ctrl+Alt+V` still works when
+> FileMaker's clipboard XML is available as plain text; otherwise it falls back to a normal paste.
 
 ## Shortcuts
 
