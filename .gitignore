@@ -1,0 +1,6 @@
+node_modules/
+*.vsix
+.fmbridge/
+
+# Scratch / client scripts — never publish (may contain proprietary schema)
+scripts/*.fmscript

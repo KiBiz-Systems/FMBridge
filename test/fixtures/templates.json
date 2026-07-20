@@ -1,0 +1,346 @@
+{
+  "Go to Record/Request/Page": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/>"
+  },
+  "Allow User Abort": {
+    "paramSpec": [
+      {
+        "label": "Set",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<Set state=\"{{0}}\"/>"
+  },
+  "Commit Records/Requests": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "ESSForceCommit",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><Option state=\"{{1}}\"/><ESSForceCommit state=\"{{2}}\"/>"
+  },
+  "Revert Record/Request": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/>"
+  },
+  "Close Window": {
+    "paramSpec": [
+      {
+        "label": "LimitToWindowsOfCurrentFile",
+        "kind": "state"
+      },
+      {
+        "label": "Window",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Name",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<LimitToWindowsOfCurrentFile state=\"{{0}}\"/><Window value=\"{{1}}\"/><Name>{{2}}</Name>"
+  },
+  "Insert from URL": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "DontEncodeURL",
+        "kind": "state"
+      },
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "VerifySSLCertificates",
+        "kind": "state"
+      },
+      {
+        "label": "CURLOptions",
+        "kind": "calc"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      },
+      {
+        "label": "Field",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><DontEncodeURL state=\"{{1}}\"/><SelectAll state=\"{{2}}\"/><VerifySSLCertificates state=\"{{3}}\"/><CURLOptions>{{4}}</CURLOptions>{{5}}<Text/><Field>{{6}}</Field>"
+  },
+  "Configure AI Account": {
+    "paramSpec": [
+      {
+        "label": "LLMType",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<LLMType value=\"{{0}}\"/><SetLLMAccount/>",
+    "id": "1"
+  },
+  "Configure RAG Account": {
+    "paramSpec": [
+      {
+        "label": "VerifySSLCertificates",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<VerifySSLCertificates state=\"{{0}}\"/><ConfigureRAGAccount/>",
+    "xmlName": "Configure RAG Account ",
+    "id": "1"
+  },
+  "Generate Response from Model": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Stream",
+        "kind": "state"
+      },
+      {
+        "label": "Set",
+        "kind": "state"
+      },
+      {
+        "label": "LinkAvail",
+        "kind": "state"
+      },
+      {
+        "label": "Restore",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "attr",
+        "attr": "type"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><SelectAll state=\"{{1}}\"/><Stream state=\"{{2}}\"/><Set state=\"{{3}}\"/><LinkAvail state=\"{{4}}\"/><Restore state=\"{{5}}\"/><UniversalPathList type=\"{{6}}\"/><LLMRequestWithTools/>",
+    "id": "1"
+  },
+  "Insert Embedding": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><LLMEmbedding/>",
+    "id": "1"
+  },
+  "Insert Embedding in Found Set": {
+    "paramSpec": [],
+    "skeleton": "<LLMBulkEmbedding/>",
+    "id": "1"
+  },
+  "Insert Image Caption": {
+    "paramSpec": [],
+    "skeleton": "<LLMEmbedding/>",
+    "id": "1"
+  },
+  "Insert Image Captions in Found Set": {
+    "paramSpec": [],
+    "skeleton": "<LLMBulkEmbedding/>",
+    "id": "1"
+  },
+  "Set AI Call Logging": {
+    "paramSpec": [
+      {
+        "label": "Set",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<Set state=\"{{0}}\"/><LLMDebugLog/>",
+    "id": "1"
+  },
+  "Configure Machine Learning Model": {
+    "paramSpec": [
+      {
+        "label": "Operation",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<ConfigureCoreML><Operation>{{0}}</Operation></ConfigureCoreML>",
+    "id": "202"
+  },
+  "Configure Prompt Template": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "ModelProvider",
+        "kind": "text"
+      },
+      {
+        "label": "RequestType",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><ConfigurePromptTemplate><ModelProvider>{{1}}</ModelProvider><RequestType>{{2}}</RequestType></ConfigurePromptTemplate>",
+    "id": "226"
+  },
+  "Configure Regression Model": {
+    "paramSpec": [
+      {
+        "label": "LLMTrainAction",
+        "kind": "text"
+      },
+      {
+        "label": "LLMAlgorithm",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<LLMTrain><LLMTrainAction>{{0}}</LLMTrainAction><LLMAlgorithm>{{1}}</LLMAlgorithm></LLMTrain>",
+    "id": "222"
+  },
+  "Fine-Tune Model": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "Table",
+        "kind": "text"
+      },
+      {
+        "label": "DataSource",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><UniversalPathList type=\"{{1}}\"/><Table id=\"0\" name=\"{{2}}\"/><FineTuneLLM><DataSource>{{3}}</DataSource></FineTuneLLM>",
+    "id": "213"
+  },
+  "Perform Find by Natural Language": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Action",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><SelectAll state=\"{{1}}\"/><LLMCreateFind><Action>{{2}}</Action></LLMCreateFind>",
+    "id": "221"
+  },
+  "Perform RAG Action": {
+    "paramSpec": [
+      {
+        "label": "DetectVertical",
+        "kind": "state"
+      },
+      {
+        "label": "RAGSpaceTokensPerTextChunk",
+        "kind": "state"
+      },
+      {
+        "label": "RAGSpaceAction",
+        "kind": "text"
+      },
+      {
+        "label": "DataSource",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<DetectVertical state=\"{{0}}\"/><RAGSpaceTokensPerTextChunk state=\"{{1}}\"/><RAGSpace><RAGSpaceAction>{{2}}</RAGSpaceAction><DataSource>{{3}}</DataSource></RAGSpace>",
+    "id": "219"
+  },
+  "Perform Semantic Find": {
+    "paramSpec": [
+      {
+        "label": "UniversalPathList",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "Query",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "Records",
+        "kind": "attr",
+        "attr": "type"
+      }
+    ],
+    "skeleton": "<UniversalPathList type=\"{{0}}\"/><LLMSemanticFind><Query type=\"{{1}}\"/><Records type=\"{{2}}\"/></LLMSemanticFind>",
+    "id": "218"
+  },
+  "Perform SQL Query by Natural Language": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "Stream",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "OptionsSelectionType",
+        "kind": "text"
+      },
+      {
+        "label": "Action",
+        "kind": "text"
+      },
+      {
+        "label": "TablesSelectionType",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><Stream state=\"{{1}}\"/><UniversalPathList type=\"{{2}}\"/><PerformSQLQuerybyNaturalLanguage><OptionsSelectionType>{{3}}</OptionsSelectionType><Action>{{4}}</Action><TablesSelectionType>{{5}}</TablesSelectionType><TableAliases/></PerformSQLQuerybyNaturalLanguage>",
+    "id": "214"
+  }
+}

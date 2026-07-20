@@ -1,0 +1,26 @@
+Set Variable [ $test_limit ; Value: GetAsNumber ( Get ( ScriptParameter ) ) ]
+Show Custom Dialog [ Title: "Backfill Search Tokens" ; Message: "This will generate AI search tokens for all products missing a search vector. This may take several minutes for large catalogs." & "¶¶" & "Continue?" ; Buttons: "Continue" , "Cancel" ]
+If [ Get ( LastMessageChoice ) = 2 ]
+    Exit Script [ Text Result: ]
+End If
+Show All Records
+Enter Find Mode [ Pause: Off ]
+Set Field [ Products::Search_Vector ; "=" ]
+Perform Find
+Set Variable [ $total ; Value: Get ( FoundCount ) ]
+Set Variable [ $processed ; Value: 0 ]
+Set Variable [ $errors ; Value: 0 ]
+Go to Record/Request/Page [ First ]
+Loop
+    Exit Loop If [ Get ( RecordNumber ) > $total or ( $test_limit > 0 and $processed + $errors ≥ $test_limit ) ]
+    Set Variable [ $id ; Value: Get ( RecordID ) ]
+    Perform Script [ "Search_GenerateTokens" ; Parameter: $id ]
+    If [ IsEmpty ( Products::Search_Vector ) ]
+        Set Variable [ $errors ; Value: $errors + 1 ]
+    Else
+        Set Variable [ $processed ; Value: $processed + 1 ]
+    End If
+    Pause/Resume Script [ Duration (seconds): 0.5 ]
+    Go to Record/Request/Page [ Next ; Exit after last: On ]
+End Loop
+Show Custom Dialog [ Title: "Backfill Complete" ; Message: "Processed: " & $processed & " records" & "¶" & "Errors/skipped: " & $errors & " records" & "¶¶" & "Run again to retry any that failed." ; Buttons: "OK" ]

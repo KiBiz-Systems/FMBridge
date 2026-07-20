@@ -1,0 +1,7 @@
+.vscodeignore
+.gitignore
+test/**
+scripts/**
+*.vsix
+.fmbridge/**
+node_modules/**

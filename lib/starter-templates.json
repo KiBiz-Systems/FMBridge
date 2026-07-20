@@ -1,0 +1,3670 @@
+{
+  "AVPlayer Play": {
+    "paramSpec": [
+      {
+        "label": "Source",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "PlaybackPosition",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Source value=\"{{0}}\"/><PlaybackPosition>{{1}}</PlaybackPosition>",
+    "id": "177"
+  },
+  "AVPlayer Set Options": {
+    "paramSpec": [
+      {
+        "label": "Presentation",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "PlaybackPosition",
+        "kind": "calc"
+      },
+      {
+        "label": "StartOffset",
+        "kind": "calc"
+      },
+      {
+        "label": "EndOffset",
+        "kind": "calc"
+      },
+      {
+        "label": "Volume",
+        "kind": "calc"
+      },
+      {
+        "label": "HideControls",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "DisableInteraction",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "DisableExternalControls",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "PauseInBackground",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Zoom",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Sequence",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<Presentation value=\"{{0}}\"/><PlaybackPosition>{{1}}</PlaybackPosition><StartOffset>{{2}}</StartOffset><EndOffset>{{3}}</EndOffset><Volume>{{4}}</Volume><HideControls value=\"{{5}}\"/><DisableInteraction value=\"{{6}}\"/><DisableExternalControls value=\"{{7}}\"/><PauseInBackground value=\"{{8}}\"/><Zoom value=\"{{9}}\"/><Sequence value=\"{{10}}\"/>",
+    "id": "179"
+  },
+  "AVPlayer Set Playback State": {
+    "paramSpec": [
+      {
+        "label": "PlaybackState",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<PlaybackState value=\"{{0}}\"/>",
+    "id": "178"
+  },
+  "Add Account": {
+    "paramSpec": [
+      {
+        "label": "ChgPwdOnNextLogin",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "Password",
+        "kind": "calc"
+      },
+      {
+        "label": "PrivilegeSet",
+        "kind": "text"
+      },
+      {
+        "label": "AccountType",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<ChgPwdOnNextLogin value=\"{{0}}\"/><AccountName>{{1}}</AccountName><Password>{{2}}</Password><PrivilegeSet id=\"2\" name=\"{{3}}\"/><AddAccount><AccountType>{{4}}</AccountType></AddAccount>",
+    "id": "134"
+  },
+  "Adjust Window": {
+    "paramSpec": [
+      {
+        "label": "WindowState",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<WindowState value=\"{{0}}\"/>",
+    "id": "31"
+  },
+  "Allow Formatting Bar": {
+    "paramSpec": [
+      {
+        "label": "Set",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<Set state=\"{{0}}\"/>",
+    "id": "115"
+  },
+  "Allow User Abort": {
+    "paramSpec": [
+      {
+        "label": "Set",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<Set state=\"{{0}}\"/>",
+    "id": "85"
+  },
+  "Append PDF": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "PDFSaveType",
+        "kind": "text"
+      },
+      {
+        "label": "OpenPassword",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><UniversalPathList>{{1}}</UniversalPathList><AppendPDFFile><PDFSaveType>{{2}}</PDFSaveType><OpenPassword>{{3}}</OpenPassword></AppendPDFFile>",
+    "id": "244"
+  },
+  "Arrange All Windows": {
+    "paramSpec": [
+      {
+        "label": "WindowArrangement",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<WindowArrangement value=\"{{0}}\"/>",
+    "id": "120"
+  },
+  "Beep": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "93"
+  },
+  "Cancel PDF": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "247"
+  },
+  "Change Password": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "OldPassword",
+        "kind": "calc"
+      },
+      {
+        "label": "NewPassword",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><OldPassword>{{1}}</OldPassword><NewPassword>{{2}}</NewPassword>",
+    "id": "83"
+  },
+  "Check Found Set": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "20"
+  },
+  "Check Record": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "19"
+  },
+  "Check Selection": {
+    "paramSpec": [
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SelectAll state=\"{{0}}\"/>{{1}}",
+    "id": "18"
+  },
+  "Clear": {
+    "paramSpec": [
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SelectAll state=\"{{0}}\"/>{{1}}",
+    "id": "49"
+  },
+  "Close Data File": {
+    "paramSpec": [
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "{{0}}",
+    "id": "196"
+  },
+  "Close File": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "34"
+  },
+  "Close PDF": {
+    "paramSpec": [
+      {
+        "label": "CreateDirectories",
+        "kind": "state"
+      },
+      {
+        "label": "AutoOpen",
+        "kind": "state"
+      },
+      {
+        "label": "CreateEmail",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "PDFSaveType",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<CreateDirectories state=\"{{0}}\"/><AutoOpen state=\"{{1}}\"/><CreateEmail state=\"{{2}}\"/><UniversalPathList>{{3}}</UniversalPathList><ClosePDFFile><PDFSaveType>{{4}}</PDFSaveType></ClosePDFFile>",
+    "id": "245"
+  },
+  "Close Popover": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "169"
+  },
+  "Close Window": {
+    "paramSpec": [
+      {
+        "label": "LimitToWindowsOfCurrentFile",
+        "kind": "state"
+      },
+      {
+        "label": "Window",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<LimitToWindowsOfCurrentFile state=\"{{0}}\"/><Window value=\"{{1}}\"/>",
+    "id": "121"
+  },
+  "Commit Records/Requests": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "ESSForceCommit",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><Option state=\"{{1}}\"/><ESSForceCommit state=\"{{2}}\"/>",
+    "id": "75"
+  },
+  "Commit Transaction": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "206"
+  },
+  "Configure AI Account": {
+    "paramSpec": [
+      {
+        "label": "LLMType",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "AccessAPIKey",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<LLMType value=\"{{0}}\"/><SetLLMAccount><AccountName>{{1}}</AccountName><AccessAPIKey>{{2}}</AccessAPIKey></SetLLMAccount>",
+    "id": "212"
+  },
+  "Configure Local Notification": {
+    "paramSpec": [
+      {
+        "label": "Script",
+        "kind": "text"
+      },
+      {
+        "label": "Action",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Name",
+        "kind": "calc"
+      },
+      {
+        "label": "Delay",
+        "kind": "calc"
+      },
+      {
+        "label": "Title",
+        "kind": "calc"
+      },
+      {
+        "label": "Body",
+        "kind": "calc"
+      },
+      {
+        "label": "Button1Label",
+        "kind": "calc"
+      },
+      {
+        "label": "Button2Label",
+        "kind": "calc"
+      },
+      {
+        "label": "Button3Label",
+        "kind": "calc"
+      },
+      {
+        "label": "Button1ForceFgnd",
+        "kind": "calc"
+      },
+      {
+        "label": "Button2ForceFgnd",
+        "kind": "calc"
+      },
+      {
+        "label": "Button3ForceFgnd",
+        "kind": "calc"
+      },
+      {
+        "label": "ShowWhenAppInForeground",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Script id=\"1061\" name=\"{{0}}\"/><Action value=\"{{1}}\"><Name>{{2}}</Name><Delay>{{3}}</Delay><Title>{{4}}</Title><Body>{{5}}</Body><Button1Label>{{6}}</Button1Label><Button2Label>{{7}}</Button2Label><Button3Label>{{8}}</Button3Label><Button1ForceFgnd>{{9}}</Button1ForceFgnd><Button2ForceFgnd>{{10}}</Button2ForceFgnd><Button3ForceFgnd>{{11}}</Button3ForceFgnd><ShowWhenAppInForeground>{{12}}</ShowWhenAppInForeground></Action>",
+    "id": "187"
+  },
+  "Configure Machine Learning Model": {
+    "paramSpec": [
+      {
+        "label": "Operation",
+        "kind": "text"
+      },
+      {
+        "label": "Name",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<ConfigureCoreML><Operation>{{0}}</Operation><Name>{{1}}</Name></ConfigureCoreML>",
+    "id": "202"
+  },
+  "Configure NFC Reading": {
+    "paramSpec": [
+      {
+        "label": "Script",
+        "kind": "text"
+      },
+      {
+        "label": "Action",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Timeout",
+        "kind": "calc"
+      },
+      {
+        "label": "ReadMultiple",
+        "kind": "calc"
+      },
+      {
+        "label": "JSONOutput",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Script id=\"1061\" name=\"{{0}}\"/><Action value=\"{{1}}\"><Timeout>{{2}}</Timeout><ReadMultiple>{{3}}</ReadMultiple><JSONOutput>{{4}}</JSONOutput></Action>",
+    "id": "201"
+  },
+  "Configure Persistent Data": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "Value",
+        "kind": "calc"
+      },
+      {
+        "label": "InstanceId",
+        "kind": "calc"
+      },
+      {
+        "label": "Name",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><Value>{{1}}</Value><InstanceId>{{2}}</InstanceId><Name>{{3}}</Name>",
+    "id": "238"
+  },
+  "Configure Prompt Template": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "ModelProvider",
+        "kind": "text"
+      },
+      {
+        "label": "RequestType",
+        "kind": "text"
+      },
+      {
+        "label": "SQLPrompt",
+        "kind": "calc"
+      },
+      {
+        "label": "NaturalLanguagePrompt",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><ConfigurePromptTemplate><ModelProvider>{{1}}</ModelProvider><RequestType>{{2}}</RequestType><SQLPrompt>{{3}}</SQLPrompt><NaturalLanguagePrompt>{{4}}</NaturalLanguagePrompt></ConfigurePromptTemplate>",
+    "id": "226"
+  },
+  "Configure RAG Account": {
+    "paramSpec": [
+      {
+        "label": "VerifySSLCertificates",
+        "kind": "state"
+      },
+      {
+        "label": "RAGAccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "Endpoint",
+        "kind": "calc"
+      },
+      {
+        "label": "AccessAPIKey",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<VerifySSLCertificates state=\"{{0}}\"/><ConfigureRAGAccount><RAGAccountName>{{1}}</RAGAccountName><Endpoint>{{2}}</Endpoint><AccessAPIKey>{{3}}</AccessAPIKey></ConfigureRAGAccount>",
+    "id": "227",
+    "xmlName": "Configure RAG Account "
+  },
+  "Configure Region Monitor Script": {
+    "paramSpec": [
+      {
+        "label": "Script",
+        "kind": "text"
+      },
+      {
+        "label": "MonitorType",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "RangeName",
+        "kind": "calc"
+      },
+      {
+        "label": "ProximityUUID",
+        "kind": "calc"
+      },
+      {
+        "label": "MajorID",
+        "kind": "calc"
+      },
+      {
+        "label": "MinorID",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Text/><Script id=\"1015\" name=\"{{0}}\"/><MonitorType value=\"{{1}}\"><RangeName>{{2}}</RangeName><ProximityUUID>{{3}}</ProximityUUID><MajorID>{{4}}</MajorID><MinorID>{{5}}</MinorID></MonitorType>",
+    "id": "185"
+  },
+  "Configure Regression Model": {
+    "paramSpec": [
+      {
+        "label": "LLMTrainAction",
+        "kind": "text"
+      },
+      {
+        "label": "LLMAlgorithm",
+        "kind": "text"
+      },
+      {
+        "label": "LLMTrainModelName",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<LLMTrain><LLMTrainAction>{{0}}</LLMTrainAction><LLMAlgorithm>{{1}}</LLMAlgorithm><LLMTrainModelName>{{2}}</LLMTrainModelName></LLMTrain>",
+    "id": "222"
+  },
+  "Constrain Found Set": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "Restore",
+        "kind": "state"
+      },
+      {
+        "label": "RequestRow",
+        "kind": "attr",
+        "attr": "operation"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      },
+      {
+        "label": "Text",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><Restore state=\"{{1}}\"/><Query><RequestRow operation=\"{{2}}\"><Criteria>{{3}}<Text>{{4}}</Text></Criteria></RequestRow></Query>",
+    "id": "126"
+  },
+  "Convert File": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "SkipIndexes",
+        "kind": "state"
+      },
+      {
+        "label": "VerifySSLCertificates",
+        "kind": "state"
+      },
+      {
+        "label": "DataSourceType",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "IsPredefined",
+        "kind": "attr",
+        "attr": "IsPredefined"
+      },
+      {
+        "label": "FieldNameRow",
+        "kind": "attr",
+        "attr": "FieldNameRow"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "TargetTableName",
+        "kind": "attr",
+        "attr": "TargetTableName"
+      },
+      {
+        "label": "CharacterSet",
+        "kind": "attr",
+        "attr": "CharacterSet"
+      },
+      {
+        "label": "KeepOriginalData",
+        "kind": "attr",
+        "attr": "KeepOriginalData"
+      },
+      {
+        "label": "PreserveContainer",
+        "kind": "attr",
+        "attr": "PreserveContainer"
+      },
+      {
+        "label": "MatchFieldNames",
+        "kind": "attr",
+        "attr": "MatchFieldNames"
+      },
+      {
+        "label": "AutoEnter",
+        "kind": "attr",
+        "attr": "AutoEnter"
+      },
+      {
+        "label": "SplitRepetitions",
+        "kind": "attr",
+        "attr": "SplitRepetitions"
+      },
+      {
+        "label": "method",
+        "kind": "attr",
+        "attr": "method"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><Option state=\"{{1}}\"/><SkipIndexes state=\"{{2}}\"/><VerifySSLCertificates state=\"{{3}}\"/><DataSourceType value=\"{{4}}\"/><Profile FieldDelimiter=\"&#9;\" IsPredefined=\"{{5}}\" FieldNameRow=\"{{6}}\" DataType=\"    \"/><UniversalPathList>{{7}}</UniversalPathList><ImportOptions TargetTableName=\"{{8}}\" CharacterSet=\"{{9}}\" KeepOriginalData=\"{{10}}\" PreserveContainer=\"{{11}}\" MatchFieldNames=\"{{12}}\" AutoEnter=\"{{13}}\" SplitRepetitions=\"{{14}}\" method=\"{{15}}\"/>",
+    "id": "139"
+  },
+  "Copy": {
+    "paramSpec": [
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SelectAll state=\"{{0}}\"/>{{1}}",
+    "id": "47"
+  },
+  "Copy All Records/Requests": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "98"
+  },
+  "Copy Record/Request": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "101"
+  },
+  "Correct Word": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "106"
+  },
+  "Create Data File": {
+    "paramSpec": [
+      {
+        "label": "CreateDirectories",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<CreateDirectories state=\"{{0}}\"/><UniversalPathList>{{1}}</UniversalPathList>",
+    "id": "190"
+  },
+  "Create PDF": {
+    "paramSpec": [
+      {
+        "label": "Restore",
+        "kind": "state"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      },
+      {
+        "label": "Title",
+        "kind": "calc"
+      },
+      {
+        "label": "Subject",
+        "kind": "calc"
+      },
+      {
+        "label": "Author",
+        "kind": "calc"
+      },
+      {
+        "label": "Keywords",
+        "kind": "calc"
+      },
+      {
+        "label": "Pages",
+        "kind": "attr",
+        "attr": "AllPages"
+      },
+      {
+        "label": "allowScreenReader",
+        "kind": "attr",
+        "attr": "allowScreenReader"
+      },
+      {
+        "label": "enableCopying",
+        "kind": "attr",
+        "attr": "enableCopying"
+      },
+      {
+        "label": "controlEditing",
+        "kind": "attr",
+        "attr": "controlEditing"
+      },
+      {
+        "label": "controlPrinting",
+        "kind": "attr",
+        "attr": "controlPrinting"
+      },
+      {
+        "label": "requireControlEditPassword",
+        "kind": "attr",
+        "attr": "requireControlEditPassword"
+      },
+      {
+        "label": "requireOpenPassword",
+        "kind": "attr",
+        "attr": "requireOpenPassword"
+      },
+      {
+        "label": "OpenPassword",
+        "kind": "calc"
+      },
+      {
+        "label": "ControlPassword",
+        "kind": "calc"
+      },
+      {
+        "label": "magnification",
+        "kind": "attr",
+        "attr": "magnification"
+      },
+      {
+        "label": "pageLayout",
+        "kind": "attr",
+        "attr": "pageLayout"
+      },
+      {
+        "label": "show",
+        "kind": "attr",
+        "attr": "show"
+      }
+    ],
+    "skeleton": "<Restore state=\"{{0}}\"/>{{1}}<CreatePDFFile><Document><Title>{{2}}</Title><Subject>{{3}}</Subject><Author>{{4}}</Author><Keywords>{{5}}</Keywords><Pages AllPages=\"{{6}}\"/></Document><Security allowScreenReader=\"{{7}}\" enableCopying=\"{{8}}\" controlEditing=\"{{9}}\" controlPrinting=\"{{10}}\" requireControlEditPassword=\"{{11}}\" requireOpenPassword=\"{{12}}\"><OpenPassword>{{13}}</OpenPassword><ControlPassword>{{14}}</ControlPassword></Security><View magnification=\"{{15}}\" pageLayout=\"{{16}}\" show=\"{{17}}\"/></CreatePDFFile>",
+    "id": "243"
+  },
+  "Cut": {
+    "paramSpec": [
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SelectAll state=\"{{0}}\"/>{{1}}",
+    "id": "46"
+  },
+  "Delete Account": {
+    "paramSpec": [
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<AccountName>{{0}}</AccountName>",
+    "id": "135"
+  },
+  "Delete All Records": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/>",
+    "id": "10"
+  },
+  "Delete File": {
+    "paramSpec": [
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<UniversalPathList>{{0}}</UniversalPathList>",
+    "id": "197"
+  },
+  "Delete Portal Row": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/>",
+    "id": "104"
+  },
+  "Delete Record/Request": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/>",
+    "id": "9"
+  },
+  "Dial Phone": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "UseDialPreferences",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><UseDialPreferences value=\"{{1}}\"/>{{2}}",
+    "id": "65"
+  },
+  "Edit User Dictionary": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "109"
+  },
+  "Enable Account": {
+    "paramSpec": [
+      {
+        "label": "AccountOperation",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<AccountOperation value=\"{{0}}\"/><AccountName>{{1}}</AccountName>",
+    "id": "137"
+  },
+  "Enable Touch Keyboard": {
+    "paramSpec": [
+      {
+        "label": "ShowHide",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<ShowHide value=\"{{0}}\"/>",
+    "id": "174"
+  },
+  "Enter Browse Mode": {
+    "paramSpec": [
+      {
+        "label": "Pause",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<Pause state=\"{{0}}\"/>",
+    "id": "55"
+  },
+  "Enter Preview Mode": {
+    "paramSpec": [
+      {
+        "label": "Pause",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<Pause state=\"{{0}}\"/>",
+    "id": "41"
+  },
+  "Execute FileMaker Data API": {
+    "paramSpec": [
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SelectAll state=\"{{0}}\"/>{{1}}{{2}}",
+    "id": "203"
+  },
+  "Execute SQL": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "QueryType",
+        "kind": "attr",
+        "attr": "QueryType"
+      },
+      {
+        "label": "flags",
+        "kind": "attr",
+        "attr": "flags"
+      },
+      {
+        "label": "IsPredefined",
+        "kind": "attr",
+        "attr": "IsPredefined"
+      },
+      {
+        "label": "FieldNameRow",
+        "kind": "attr",
+        "attr": "FieldNameRow"
+      },
+      {
+        "label": "DataType",
+        "kind": "attr",
+        "attr": "DataType"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><Profile QueryType=\"{{1}}\" flags=\"{{2}}\" password=\"\" UserName=\"\" dsn=\"\" FieldDelimiter=\"&#9;\" IsPredefined=\"{{3}}\" FieldNameRow=\"{{4}}\" DataType=\"{{5}}\"/>",
+    "id": "117"
+  },
+  "Exit Application": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "44"
+  },
+  "Export Field Contents": {
+    "paramSpec": [
+      {
+        "label": "CreateDirectories",
+        "kind": "state"
+      },
+      {
+        "label": "AutoOpen",
+        "kind": "state"
+      },
+      {
+        "label": "CreateEmail",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<CreateDirectories state=\"{{0}}\"/><AutoOpen state=\"{{1}}\"/><CreateEmail state=\"{{2}}\"/><UniversalPathList>{{3}}</UniversalPathList>{{4}}",
+    "id": "132"
+  },
+  "Export Records": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "CreateDirectories",
+        "kind": "state"
+      },
+      {
+        "label": "Restore",
+        "kind": "state"
+      },
+      {
+        "label": "AutoOpen",
+        "kind": "state"
+      },
+      {
+        "label": "CreateEmail",
+        "kind": "state"
+      },
+      {
+        "label": "IsPredefined",
+        "kind": "attr",
+        "attr": "IsPredefined"
+      },
+      {
+        "label": "FieldNameRow",
+        "kind": "attr",
+        "attr": "FieldNameRow"
+      },
+      {
+        "label": "DataType",
+        "kind": "attr",
+        "attr": "DataType"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "FormatUsingCurrentLayout",
+        "kind": "attr",
+        "attr": "FormatUsingCurrentLayout"
+      },
+      {
+        "label": "CharacterSet",
+        "kind": "attr",
+        "attr": "CharacterSet"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><CreateDirectories state=\"{{1}}\"/><Restore state=\"{{2}}\"/><AutoOpen state=\"{{3}}\"/><CreateEmail state=\"{{4}}\"/><Profile FieldDelimiter=\"&#9;\" IsPredefined=\"{{5}}\" FieldNameRow=\"{{6}}\" DataType=\"{{7}}\"/><UniversalPathList>{{8}}</UniversalPathList><ExportOptions FormatUsingCurrentLayout=\"{{9}}\" CharacterSet=\"{{10}}\"/><ExportEntries><ExportEntry>{{11}}</ExportEntry></ExportEntries>",
+    "id": "36"
+  },
+  "Extend Found Set": {
+    "paramSpec": [
+      {
+        "label": "Restore",
+        "kind": "state"
+      },
+      {
+        "label": "RequestRow",
+        "kind": "attr",
+        "attr": "operation"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      },
+      {
+        "label": "Text",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Restore state=\"{{0}}\"/><Query><RequestRow operation=\"{{1}}\"><Criteria>{{2}}<Text>{{3}}</Text></Criteria></RequestRow></Query>",
+    "id": "127"
+  },
+  "Find Matching Records": {
+    "paramSpec": [
+      {
+        "label": "FindMatchingRecordsByField",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<FindMatchingRecordsByField value=\"{{0}}\"/>{{1}}",
+    "id": "155"
+  },
+  "Fine-Tune Model": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "FineTuneBaseModelName",
+        "kind": "calc"
+      },
+      {
+        "label": "DataSource",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><UniversalPathList type=\"{{1}}\"/><FineTuneLLM><AccountName>{{2}}</AccountName><FineTuneBaseModelName>{{3}}</FineTuneBaseModelName><DataSource>{{4}}</DataSource></FineTuneLLM>",
+    "id": "213"
+  },
+  "Flush Cache to Disk": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "102"
+  },
+  "Flush Web Viewer Cookies": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "237"
+  },
+  "Generate Response from Model": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Stream",
+        "kind": "state"
+      },
+      {
+        "label": "Set",
+        "kind": "state"
+      },
+      {
+        "label": "LinkAvail",
+        "kind": "state"
+      },
+      {
+        "label": "Restore",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "Model",
+        "kind": "calc"
+      },
+      {
+        "label": "UserPrompt",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><SelectAll state=\"{{1}}\"/><Stream state=\"{{2}}\"/><Set state=\"{{3}}\"/><LinkAvail state=\"{{4}}\"/><Restore state=\"{{5}}\"/><UniversalPathList type=\"{{6}}\"/><LLMRequestWithTools><AccountName>{{7}}</AccountName><Model>{{8}}</Model><UserPrompt>{{9}}</UserPrompt></LLMRequestWithTools>",
+    "id": "220"
+  },
+  "Get Data File Position": {
+    "paramSpec": [
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "{{0}}{{1}}",
+    "id": "194"
+  },
+  "Get File Exists": {
+    "paramSpec": [
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<UniversalPathList>{{0}}</UniversalPathList>{{1}}",
+    "id": "188"
+  },
+  "Get File Size": {
+    "paramSpec": [
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<UniversalPathList>{{0}}</UniversalPathList>{{1}}",
+    "id": "189"
+  },
+  "Get Folder Path": {
+    "paramSpec": [
+      {
+        "label": "AllowFolderCreation",
+        "kind": "state"
+      },
+      {
+        "label": "Repetition",
+        "kind": "calc"
+      },
+      {
+        "label": "DialogTitle",
+        "kind": "calc"
+      },
+      {
+        "label": "DefaultLocation",
+        "kind": "calc"
+      },
+      {
+        "label": "Name",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<AllowFolderCreation state=\"{{0}}\"/><Repetition>{{1}}</Repetition><DialogTitle>{{2}}</DialogTitle><DefaultLocation>{{3}}</DefaultLocation><Name>{{4}}</Name>",
+    "id": "181"
+  },
+  "Go to Field": {
+    "paramSpec": [
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SelectAll state=\"{{0}}\"/>{{1}}",
+    "id": "17"
+  },
+  "Go to Layout": {
+    "paramSpec": [
+      {
+        "label": "LayoutDestination",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Layout",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<LayoutDestination value=\"{{0}}\"/><Layout id=\"416\" name=\"{{1}}\"/>",
+    "id": "6"
+  },
+  "Go to List of Records": {
+    "paramSpec": [
+      {
+        "label": "ShowInNewWindow",
+        "kind": "state"
+      },
+      {
+        "label": "LayoutDestination",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Name",
+        "kind": "calc"
+      },
+      {
+        "label": "Height",
+        "kind": "calc"
+      },
+      {
+        "label": "Width",
+        "kind": "calc"
+      },
+      {
+        "label": "DistanceFromTop",
+        "kind": "calc"
+      },
+      {
+        "label": "DistanceFromLeft",
+        "kind": "calc"
+      },
+      {
+        "label": "RowList",
+        "kind": "calc"
+      },
+      {
+        "label": "DimParentWindow",
+        "kind": "attr",
+        "attr": "DimParentWindow"
+      },
+      {
+        "label": "Toolbars",
+        "kind": "attr",
+        "attr": "Toolbars"
+      },
+      {
+        "label": "MenuBar",
+        "kind": "attr",
+        "attr": "MenuBar"
+      },
+      {
+        "label": "Style",
+        "kind": "attr",
+        "attr": "Style"
+      },
+      {
+        "label": "Close",
+        "kind": "attr",
+        "attr": "Close"
+      },
+      {
+        "label": "Minimize",
+        "kind": "attr",
+        "attr": "Minimize"
+      },
+      {
+        "label": "Maximize",
+        "kind": "attr",
+        "attr": "Maximize"
+      },
+      {
+        "label": "Resize",
+        "kind": "attr",
+        "attr": "Resize"
+      },
+      {
+        "label": "Styles",
+        "kind": "attr",
+        "attr": "Styles"
+      },
+      {
+        "label": "Layout",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<ShowInNewWindow state=\"{{0}}\"/><LayoutDestination value=\"{{1}}\"/><Name>{{2}}</Name><Height>{{3}}</Height><Width>{{4}}</Width><DistanceFromTop>{{5}}</DistanceFromTop><DistanceFromLeft>{{6}}</DistanceFromLeft><RowList>{{7}}</RowList><NewWndStyles DimParentWindow=\"{{8}}\" Toolbars=\"{{9}}\" MenuBar=\"{{10}}\" Style=\"{{11}}\" Close=\"{{12}}\" Minimize=\"{{13}}\" Maximize=\"{{14}}\" Resize=\"{{15}}\" Styles=\"{{16}}\"/><Layout id=\"362\" name=\"{{17}}\"/>",
+    "id": "228"
+  },
+  "Go to Next Field": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "4"
+  },
+  "Go to Object": {
+    "paramSpec": [
+      {
+        "label": "ObjectName",
+        "kind": "calc"
+      },
+      {
+        "label": "Repetition",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<ObjectName>{{0}}</ObjectName><Repetition>{{1}}</Repetition>",
+    "id": "145"
+  },
+  "Go to Portal Row": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "RowPageLocation",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><SelectAll state=\"{{1}}\"/><RowPageLocation value=\"{{2}}\"/>",
+    "id": "99"
+  },
+  "Go to Previous Field": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "5"
+  },
+  "Go to Related Record": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "MatchAllRecords",
+        "kind": "state"
+      },
+      {
+        "label": "ShowInNewWindow",
+        "kind": "state"
+      },
+      {
+        "label": "Restore",
+        "kind": "state"
+      },
+      {
+        "label": "LayoutDestination",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Name",
+        "kind": "calc"
+      },
+      {
+        "label": "Height",
+        "kind": "calc"
+      },
+      {
+        "label": "Width",
+        "kind": "calc"
+      },
+      {
+        "label": "DistanceFromTop",
+        "kind": "calc"
+      },
+      {
+        "label": "DistanceFromLeft",
+        "kind": "calc"
+      },
+      {
+        "label": "DimParentWindow",
+        "kind": "attr",
+        "attr": "DimParentWindow"
+      },
+      {
+        "label": "Toolbars",
+        "kind": "attr",
+        "attr": "Toolbars"
+      },
+      {
+        "label": "MenuBar",
+        "kind": "attr",
+        "attr": "MenuBar"
+      },
+      {
+        "label": "Style",
+        "kind": "attr",
+        "attr": "Style"
+      },
+      {
+        "label": "Close",
+        "kind": "attr",
+        "attr": "Close"
+      },
+      {
+        "label": "Minimize",
+        "kind": "attr",
+        "attr": "Minimize"
+      },
+      {
+        "label": "Maximize",
+        "kind": "attr",
+        "attr": "Maximize"
+      },
+      {
+        "label": "Resize",
+        "kind": "attr",
+        "attr": "Resize"
+      },
+      {
+        "label": "Styles",
+        "kind": "attr",
+        "attr": "Styles"
+      },
+      {
+        "label": "Table",
+        "kind": "text"
+      },
+      {
+        "label": "Layout",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><MatchAllRecords state=\"{{1}}\"/><ShowInNewWindow state=\"{{2}}\"/><Restore state=\"{{3}}\"/><LayoutDestination value=\"{{4}}\"/><Name>{{5}}</Name><Height>{{6}}</Height><Width>{{7}}</Width><DistanceFromTop>{{8}}</DistanceFromTop><DistanceFromLeft>{{9}}</DistanceFromLeft><NewWndStyles DimParentWindow=\"{{10}}\" Toolbars=\"{{11}}\" MenuBar=\"{{12}}\" Style=\"{{13}}\" Close=\"{{14}}\" Minimize=\"{{15}}\" Maximize=\"{{16}}\" Resize=\"{{17}}\" Styles=\"{{18}}\"/><Table id=\"1065089\" name=\"{{19}}\"/><Layout id=\"256\" name=\"{{20}}\"/>",
+    "id": "74"
+  },
+  "Import Records": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "Restore",
+        "kind": "state"
+      },
+      {
+        "label": "VerifySSLCertificates",
+        "kind": "state"
+      },
+      {
+        "label": "DataSourceType",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Profile",
+        "kind": "raw"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "CharacterSet",
+        "kind": "attr",
+        "attr": "CharacterSet"
+      },
+      {
+        "label": "KeepOriginalData",
+        "kind": "attr",
+        "attr": "KeepOriginalData"
+      },
+      {
+        "label": "PreserveContainer",
+        "kind": "attr",
+        "attr": "PreserveContainer"
+      },
+      {
+        "label": "MatchFieldNames",
+        "kind": "attr",
+        "attr": "MatchFieldNames"
+      },
+      {
+        "label": "AutoEnter",
+        "kind": "attr",
+        "attr": "AutoEnter"
+      },
+      {
+        "label": "SplitRepetitions",
+        "kind": "attr",
+        "attr": "SplitRepetitions"
+      },
+      {
+        "label": "method",
+        "kind": "attr",
+        "attr": "method"
+      },
+      {
+        "label": "Table",
+        "kind": "text"
+      },
+      {
+        "label": "TargetFields",
+        "kind": "raw"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><Restore state=\"{{1}}\"/><VerifySSLCertificates state=\"{{2}}\"/><DataSourceType value=\"{{3}}\"/>{{4}}<UniversalPathList>{{5}}</UniversalPathList><ImportOptions CharacterSet=\"{{6}}\" KeepOriginalData=\"{{7}}\" PreserveContainer=\"{{8}}\" MatchFieldNames=\"{{9}}\" AutoEnter=\"{{10}}\" SplitRepetitions=\"{{11}}\" method=\"{{12}}\"/><Table id=\"1065631\" name=\"{{13}}\"/>{{14}}",
+    "id": "35"
+  },
+  "Insert Audio/Video": {
+    "paramSpec": [
+      {
+        "label": "UniversalPathListType",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<UniversalPathList type=\"{{0}}\">{{1}}</UniversalPathList>",
+    "id": "159"
+  },
+  "Insert Calculated Result": {
+    "paramSpec": [
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SelectAll state=\"{{0}}\"/>{{1}}",
+    "id": "77"
+  },
+  "Insert Current Date": {
+    "paramSpec": [
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SelectAll state=\"{{0}}\"/>{{1}}",
+    "id": "13"
+  },
+  "Insert Current Time": {
+    "paramSpec": [
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SelectAll state=\"{{0}}\"/>{{1}}",
+    "id": "14"
+  },
+  "Insert Current User Name": {
+    "paramSpec": [
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SelectAll state=\"{{0}}\"/>{{1}}",
+    "id": "60"
+  },
+  "Insert Embedding": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "Model",
+        "kind": "calc"
+      },
+      {
+        "label": "InputText",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><LLMEmbedding><AccountName>{{1}}</AccountName><Model>{{2}}</Model><InputText>{{3}}</InputText></LLMEmbedding>",
+    "id": "215"
+  },
+  "Insert Embedding in Found Set": {
+    "paramSpec": [
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "Model",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<LLMBulkEmbedding><AccountName>{{0}}</AccountName><Model>{{1}}</Model></LLMBulkEmbedding>",
+    "id": "216"
+  },
+  "Insert File": {
+    "paramSpec": [
+      {
+        "label": "UniversalPathListType",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      },
+      {
+        "label": "asFile",
+        "kind": "attr",
+        "attr": "asFile"
+      },
+      {
+        "label": "enable",
+        "kind": "attr",
+        "attr": "enable"
+      },
+      {
+        "label": "Storage",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "Compress",
+        "kind": "attr",
+        "attr": "type"
+      }
+    ],
+    "skeleton": "<UniversalPathList type=\"{{0}}\">{{1}}</UniversalPathList>{{2}}<DialogOptions asFile=\"{{3}}\" enable=\"{{4}}\"><Storage type=\"{{5}}\"/><Compress type=\"{{6}}\"/><FilterList/></DialogOptions>",
+    "id": "131"
+  },
+  "Insert Image Caption": {
+    "paramSpec": [
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "Model",
+        "kind": "calc"
+      },
+      {
+        "label": "InputText",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<LLMEmbedding><AccountName>{{0}}</AccountName><Model>{{1}}</Model><InputText>{{2}}</InputText></LLMEmbedding>",
+    "id": "241"
+  },
+  "Insert Image Captions in Found Set": {
+    "paramSpec": [
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "Model",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<LLMBulkEmbedding><AccountName>{{0}}</AccountName><Model>{{1}}</Model></LLMBulkEmbedding>",
+    "id": "240"
+  },
+  "Insert PDF": {
+    "paramSpec": [
+      {
+        "label": "UniversalPathListType",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<UniversalPathList type=\"{{0}}\">{{1}}</UniversalPathList>",
+    "id": "158"
+  },
+  "Insert Picture": {
+    "paramSpec": [
+      {
+        "label": "UniversalPathListType",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<UniversalPathList type=\"{{0}}\">{{1}}</UniversalPathList>",
+    "id": "56"
+  },
+  "Insert Text": {
+    "paramSpec": [
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SelectAll state=\"{{0}}\"/>{{1}}",
+    "id": "61"
+  },
+  "Insert from Device": {
+    "paramSpec": [
+      {
+        "label": "InsertFrom",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Camera",
+        "kind": "attr",
+        "attr": "choice"
+      },
+      {
+        "label": "Resolution",
+        "kind": "attr",
+        "attr": "choice"
+      },
+      {
+        "label": "LightMode",
+        "kind": "attr",
+        "attr": "choice"
+      }
+    ],
+    "skeleton": "<InsertFrom value=\"{{0}}\"/><DeviceOptions><Camera choice=\"{{1}}\"/><Resolution choice=\"{{2}}\"/><LightMode choice=\"{{3}}\"/></DeviceOptions>",
+    "id": "161"
+  },
+  "Insert from Index": {
+    "paramSpec": [
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SelectAll state=\"{{0}}\"/>{{1}}",
+    "id": "11"
+  },
+  "Insert from Last Visited": {
+    "paramSpec": [
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SelectAll state=\"{{0}}\"/>{{1}}",
+    "id": "12"
+  },
+  "Insert from URL": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "DontEncodeURL",
+        "kind": "state"
+      },
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "VerifySSLCertificates",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><DontEncodeURL state=\"{{1}}\"/><SelectAll state=\"{{2}}\"/><VerifySSLCertificates state=\"{{3}}\"/>{{4}}",
+    "id": "160"
+  },
+  "Install Menu Set": {
+    "paramSpec": [
+      {
+        "label": "UseAsFileDefault",
+        "kind": "state"
+      },
+      {
+        "label": "CustomMenuSet",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<UseAsFileDefault state=\"{{0}}\"/><CustomMenuSet id=\"1\" name=\"{{1}}\"/>",
+    "id": "142"
+  },
+  "Install OnTimer Script": {
+    "paramSpec": [
+      {
+        "label": "Interval",
+        "kind": "calc"
+      },
+      {
+        "label": "Script",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Interval>{{0}}</Interval><Script id=\"1016\" name=\"{{1}}\"/>",
+    "id": "148"
+  },
+  "Install Plug-In File": {
+    "paramSpec": [
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "{{0}}",
+    "id": "157"
+  },
+  "Modify Last Find": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "24"
+  },
+  "Move/Resize Window": {
+    "paramSpec": [
+      {
+        "label": "LimitToWindowsOfCurrentFile",
+        "kind": "state"
+      },
+      {
+        "label": "Window",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<LimitToWindowsOfCurrentFile state=\"{{0}}\"/><Window value=\"{{1}}\"/>",
+    "id": "119"
+  },
+  "New File": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "82"
+  },
+  "New Window": {
+    "paramSpec": [
+      {
+        "label": "LayoutDestination",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Name",
+        "kind": "calc"
+      },
+      {
+        "label": "Height",
+        "kind": "calc"
+      },
+      {
+        "label": "Width",
+        "kind": "calc"
+      },
+      {
+        "label": "DistanceFromLeft",
+        "kind": "calc"
+      },
+      {
+        "label": "DimParentWindow",
+        "kind": "attr",
+        "attr": "DimParentWindow"
+      },
+      {
+        "label": "Toolbars",
+        "kind": "attr",
+        "attr": "Toolbars"
+      },
+      {
+        "label": "MenuBar",
+        "kind": "attr",
+        "attr": "MenuBar"
+      },
+      {
+        "label": "Style",
+        "kind": "attr",
+        "attr": "Style"
+      },
+      {
+        "label": "Close",
+        "kind": "attr",
+        "attr": "Close"
+      },
+      {
+        "label": "Minimize",
+        "kind": "attr",
+        "attr": "Minimize"
+      },
+      {
+        "label": "Maximize",
+        "kind": "attr",
+        "attr": "Maximize"
+      },
+      {
+        "label": "Resize",
+        "kind": "attr",
+        "attr": "Resize"
+      },
+      {
+        "label": "Styles",
+        "kind": "attr",
+        "attr": "Styles"
+      },
+      {
+        "label": "Layout",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<LayoutDestination value=\"{{0}}\"/><Name>{{1}}</Name><Height>{{2}}</Height><Width>{{3}}</Width><DistanceFromLeft>{{4}}</DistanceFromLeft><NewWndStyles DimParentWindow=\"{{5}}\" Toolbars=\"{{6}}\" MenuBar=\"{{7}}\" Style=\"{{8}}\" Close=\"{{9}}\" Minimize=\"{{10}}\" Maximize=\"{{11}}\" Resize=\"{{12}}\" Styles=\"{{13}}\"/><Layout id=\"296\" name=\"{{14}}\"/>",
+    "id": "122"
+  },
+  "Omit Multiple Records": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/>{{1}}",
+    "id": "26"
+  },
+  "Open Data File": {
+    "paramSpec": [
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<UniversalPathList>{{0}}</UniversalPathList>{{1}}",
+    "id": "191"
+  },
+  "Open Edit Saved Finds": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "149"
+  },
+  "Open Favorites": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "183"
+  },
+  "Open File": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "FileReference",
+        "kind": "attr",
+        "attr": "name"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><FileReference id=\"68\" name=\"{{1}}\"><UniversalPathList>{{2}}</UniversalPathList></FileReference>",
+    "id": "33"
+  },
+  "Open File Options": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "114"
+  },
+  "Open Find/Replace": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "129"
+  },
+  "Open Help": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "32"
+  },
+  "Open Hosts": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "118"
+  },
+  "Open Manage Containers": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "156"
+  },
+  "Open Manage Data Sources": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "140"
+  },
+  "Open Manage Database": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "38"
+  },
+  "Open Manage Layouts": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "151"
+  },
+  "Open Manage Themes": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "165"
+  },
+  "Open Manage Value Lists": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "112"
+  },
+  "Open PDF": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "PDFSaveType",
+        "kind": "text"
+      },
+      {
+        "label": "OpenPassword",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><UniversalPathList>{{1}}</UniversalPathList><OpenPDFFile><PDFSaveType>{{2}}</PDFSaveType><OpenPassword>{{3}}</OpenPassword></OpenPDFFile>",
+    "id": "246"
+  },
+  "Open Script Workspace": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "88"
+  },
+  "Open Settings": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "105"
+  },
+  "Open Sharing": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "113"
+  },
+  "Open Transaction": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "ESSForceCommit",
+        "kind": "state"
+      },
+      {
+        "label": "SkipAutoEntry",
+        "kind": "state"
+      },
+      {
+        "label": "Restore",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><ESSForceCommit state=\"{{1}}\"/><SkipAutoEntry state=\"{{2}}\"/><Restore state=\"{{3}}\"/>",
+    "id": "205"
+  },
+  "Open URL": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><Option state=\"{{1}}\"/>{{2}}",
+    "id": "111"
+  },
+  "Open Upload to Host": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "172"
+  },
+  "Paste": {
+    "paramSpec": [
+      {
+        "label": "NoStyle",
+        "kind": "state"
+      },
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "LinkAvail",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<NoStyle state=\"{{0}}\"/><SelectAll state=\"{{1}}\"/><LinkAvail state=\"{{2}}\"/>{{3}}",
+    "id": "48"
+  },
+  "Perform AppleScript": {
+    "paramSpec": [
+      {
+        "label": "ContentType",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<ContentType value=\"{{0}}\"/>",
+    "id": "67"
+  },
+  "Perform Find": {
+    "paramSpec": [
+      {
+        "label": "Restore",
+        "kind": "state"
+      },
+      {
+        "label": "RequestRow",
+        "kind": "attr",
+        "attr": "operation"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      },
+      {
+        "label": "Text",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Restore state=\"{{0}}\"/><Query><RequestRow operation=\"{{1}}\"><Criteria>{{2}}<Text>{{3}}</Text></Criteria></RequestRow></Query>",
+    "id": "28"
+  },
+  "Perform Find by Natural Language": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "Model",
+        "kind": "calc"
+      },
+      {
+        "label": "PromptMessage",
+        "kind": "calc"
+      },
+      {
+        "label": "Action",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><SelectAll state=\"{{1}}\"/><LLMCreateFind><AccountName>{{2}}</AccountName><Model>{{3}}</Model><PromptMessage>{{4}}</PromptMessage><Action>{{5}}</Action></LLMCreateFind>",
+    "id": "221"
+  },
+  "Perform Find/Replace": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "MatchWholeWords",
+        "kind": "attr",
+        "attr": "MatchWholeWords"
+      },
+      {
+        "label": "MatchCase",
+        "kind": "attr",
+        "attr": "MatchCase"
+      },
+      {
+        "label": "WithinOptions",
+        "kind": "attr",
+        "attr": "WithinOptions"
+      },
+      {
+        "label": "AcrossOptions",
+        "kind": "attr",
+        "attr": "AcrossOptions"
+      },
+      {
+        "label": "direction",
+        "kind": "attr",
+        "attr": "direction"
+      },
+      {
+        "label": "type",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "FindCalc",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><FindReplaceOperation MatchWholeWords=\"{{1}}\" MatchCase=\"{{2}}\" WithinOptions=\"{{3}}\" AcrossOptions=\"{{4}}\" direction=\"{{5}}\" type=\"{{6}}\"/><FindCalc>{{7}}</FindCalc>",
+    "id": "128"
+  },
+  "Perform JavaScript in Web Viewer": {
+    "paramSpec": [
+      {
+        "label": "ObjectName",
+        "kind": "calc"
+      },
+      {
+        "label": "FunctionName",
+        "kind": "calc"
+      },
+      {
+        "label": "Parameters",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<ObjectName>{{0}}</ObjectName><FunctionName>{{1}}</FunctionName><Parameters Count=\"1\">{{2}}</Parameters>",
+    "id": "175"
+  },
+  "Perform Quick Find": {
+    "paramSpec": [
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "{{0}}",
+    "id": "150"
+  },
+  "Perform RAG Action": {
+    "paramSpec": [
+      {
+        "label": "DetectVertical",
+        "kind": "state"
+      },
+      {
+        "label": "RAGSpaceTokensPerTextChunk",
+        "kind": "state"
+      },
+      {
+        "label": "RAGAccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "RAGSpaceAction",
+        "kind": "text"
+      },
+      {
+        "label": "DataSource",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<DetectVertical state=\"{{0}}\"/><RAGSpaceTokensPerTextChunk state=\"{{1}}\"/><RAGSpace><RAGAccountName>{{2}}</RAGAccountName><RAGSpaceAction>{{3}}</RAGSpaceAction><DataSource>{{4}}</DataSource></RAGSpace>",
+    "id": "219"
+  },
+  "Perform SQL Query by Natural Language": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "Stream",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "Model",
+        "kind": "calc"
+      },
+      {
+        "label": "PromptMessage",
+        "kind": "calc"
+      },
+      {
+        "label": "OptionsSelectionType",
+        "kind": "text"
+      },
+      {
+        "label": "Action",
+        "kind": "text"
+      },
+      {
+        "label": "TablesSelectionType",
+        "kind": "text"
+      },
+      {
+        "label": "Table",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><Stream state=\"{{1}}\"/><UniversalPathList type=\"{{2}}\"/><PerformSQLQuerybyNaturalLanguage><AccountName>{{3}}</AccountName><Model>{{4}}</Model><PromptMessage>{{5}}</PromptMessage><OptionsSelectionType>{{6}}</OptionsSelectionType><Action>{{7}}</Action><TablesSelectionType>{{8}}</TablesSelectionType><TableAliases><Table id=\"1065724\" name=\"{{9}}\"/></TableAliases></PerformSQLQuerybyNaturalLanguage>",
+    "id": "214"
+  },
+  "Perform Script on Server": {
+    "paramSpec": [
+      {
+        "label": "WaitForCompletion",
+        "kind": "state"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      },
+      {
+        "label": "Script",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<WaitForCompletion state=\"{{0}}\"/>{{1}}<Script id=\"1061\" name=\"{{2}}\"/>",
+    "id": "164"
+  },
+  "Perform Script on Server with Callback": {
+    "paramSpec": [
+      {
+        "label": "CallbackScriptState",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      },
+      {
+        "label": "Script",
+        "kind": "text"
+      },
+      {
+        "label": "ScriptName",
+        "kind": "text"
+      },
+      {
+        "label": "ScriptParameter",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<CallbackScriptState value=\"{{0}}\"/>{{1}}<Script id=\"1061\" name=\"{{2}}\"/><CallbackScript><ScriptName id=\"1018\" name=\"{{3}}\"/><ScriptParameter>{{4}}</ScriptParameter></CallbackScript>",
+    "id": "210"
+  },
+  "Perform Semantic Find": {
+    "paramSpec": [
+      {
+        "label": "UniversalPathList",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "Query",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "LLMEmbeddingModel",
+        "kind": "calc"
+      },
+      {
+        "label": "Text",
+        "kind": "calc"
+      },
+      {
+        "label": "Records",
+        "kind": "attr",
+        "attr": "type"
+      }
+    ],
+    "skeleton": "<UniversalPathList type=\"{{0}}\"/><LLMSemanticFind><Query type=\"{{1}}\"/><AccountName>{{2}}</AccountName><LLMEmbeddingModel>{{3}}</LLMEmbeddingModel><Text>{{4}}</Text><Records type=\"{{5}}\"/></LLMSemanticFind>",
+    "id": "218"
+  },
+  "Print": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "Restore",
+        "kind": "state"
+      },
+      {
+        "label": "PrintSettings",
+        "kind": "raw"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><Restore state=\"{{1}}\"/>{{2}}",
+    "id": "43"
+  },
+  "Print PDF": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "UsePrintOptionsFromEnabled",
+        "kind": "state"
+      },
+      {
+        "label": "SavePrintOptionsToEnabled",
+        "kind": "state"
+      },
+      {
+        "label": "Restore",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><Option state=\"{{1}}\"/><UsePrintOptionsFromEnabled state=\"{{2}}\"/><SavePrintOptionsToEnabled state=\"{{3}}\"/><Restore state=\"{{4}}\"/>",
+    "id": "242"
+  },
+  "Print Setup": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "Restore",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><Restore state=\"{{1}}\"/>",
+    "id": "42"
+  },
+  "Re-Login": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "Password",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><AccountName>{{1}}</AccountName><Password>{{2}}</Password>",
+    "id": "138"
+  },
+  "Read from Data File": {
+    "paramSpec": [
+      {
+        "label": "DataSourceType",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<DataSourceType value=\"{{0}}\"/>{{1}}{{2}}",
+    "id": "193"
+  },
+  "Recover File": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><UniversalPathList>{{1}}</UniversalPathList>",
+    "id": "95"
+  },
+  "Refresh Object": {
+    "paramSpec": [
+      {
+        "label": "ObjectName",
+        "kind": "calc"
+      },
+      {
+        "label": "Repetition",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<ObjectName>{{0}}</ObjectName><Repetition>{{1}}</Repetition>",
+    "id": "167"
+  },
+  "Refresh Portal": {
+    "paramSpec": [
+      {
+        "label": "ObjectName",
+        "kind": "calc"
+      },
+      {
+        "label": "Repetition",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<ObjectName>{{0}}</ObjectName><Repetition>{{1}}</Repetition>",
+    "id": "180"
+  },
+  "Refresh Window": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "FlushSQLData",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><FlushSQLData state=\"{{1}}\"/>",
+    "id": "80"
+  },
+  "Relookup Field Contents": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/>{{1}}",
+    "id": "40"
+  },
+  "Rename File": {
+    "paramSpec": [
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<UniversalPathList>{{0}}</UniversalPathList>{{1}}",
+    "id": "199"
+  },
+  "Replace Field Contents": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "Restore",
+        "kind": "state"
+      },
+      {
+        "label": "With",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      },
+      {
+        "label": "PerformAutoEnter",
+        "kind": "attr",
+        "attr": "PerformAutoEnter"
+      },
+      {
+        "label": "UpdateEntryOptions",
+        "kind": "attr",
+        "attr": "UpdateEntryOptions"
+      },
+      {
+        "label": "UseEntryOptions",
+        "kind": "attr",
+        "attr": "UseEntryOptions"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><Restore state=\"{{1}}\"/><With value=\"{{2}}\"/>{{3}}<SerialNumbers PerformAutoEnter=\"{{4}}\" UpdateEntryOptions=\"{{5}}\" UseEntryOptions=\"{{6}}\"/>{{7}}",
+    "id": "91"
+  },
+  "Reset Account Password": {
+    "paramSpec": [
+      {
+        "label": "ChgPwdOnNextLogin",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "AccountName",
+        "kind": "calc"
+      },
+      {
+        "label": "Password",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<ChgPwdOnNextLogin value=\"{{0}}\"/><AccountName>{{1}}</AccountName><Password>{{2}}</Password>",
+    "id": "136"
+  },
+  "Revert Record/Request": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/>",
+    "id": "51"
+  },
+  "Revert Transaction": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "Condition",
+        "kind": "calc"
+      },
+      {
+        "label": "ErrorCode",
+        "kind": "calc"
+      },
+      {
+        "label": "ErrorMessage",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><Condition>{{1}}</Condition><ErrorCode>{{2}}</ErrorCode><ErrorMessage>{{3}}</ErrorMessage>",
+    "id": "207"
+  },
+  "Save Records as Excel": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "CreateDirectories",
+        "kind": "state"
+      },
+      {
+        "label": "Restore",
+        "kind": "state"
+      },
+      {
+        "label": "AutoOpen",
+        "kind": "state"
+      },
+      {
+        "label": "CreateEmail",
+        "kind": "state"
+      },
+      {
+        "label": "IsPredefined",
+        "kind": "attr",
+        "attr": "IsPredefined"
+      },
+      {
+        "label": "FieldNameRow",
+        "kind": "attr",
+        "attr": "FieldNameRow"
+      },
+      {
+        "label": "DataType",
+        "kind": "attr",
+        "attr": "DataType"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "WorkSheet",
+        "kind": "calc"
+      },
+      {
+        "label": "Title",
+        "kind": "calc"
+      },
+      {
+        "label": "Subject",
+        "kind": "calc"
+      },
+      {
+        "label": "Author",
+        "kind": "calc"
+      },
+      {
+        "label": "SaveType",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "UseFieldNames",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><CreateDirectories state=\"{{1}}\"/><Restore state=\"{{2}}\"/><AutoOpen state=\"{{3}}\"/><CreateEmail state=\"{{4}}\"/><Profile FieldDelimiter=\"&#9;\" IsPredefined=\"{{5}}\" FieldNameRow=\"{{6}}\" DataType=\"{{7}}\"/><UniversalPathList>{{8}}</UniversalPathList><WorkSheet>{{9}}</WorkSheet><Title>{{10}}</Title><Subject>{{11}}</Subject><Author>{{12}}</Author><SaveType value=\"{{13}}\"/><UseFieldNames state=\"{{14}}\"/>",
+    "id": "143"
+  },
+  "Save Records as JSONL": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "CreateDirectories",
+        "kind": "state"
+      },
+      {
+        "label": "FineTuneFormat",
+        "kind": "state"
+      },
+      {
+        "label": "AutoOpen",
+        "kind": "state"
+      },
+      {
+        "label": "CreateEmail",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "Table",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><CreateDirectories state=\"{{1}}\"/><FineTuneFormat state=\"{{2}}\"/><AutoOpen state=\"{{3}}\"/><CreateEmail state=\"{{4}}\"/><UniversalPathList>{{5}}</UniversalPathList><Table id=\"1065137\" name=\"{{6}}\"/><SaveAsJSONL/>",
+    "id": "225"
+  },
+  "Save Records as PDF": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "CreateDirectories",
+        "kind": "state"
+      },
+      {
+        "label": "Restore",
+        "kind": "state"
+      },
+      {
+        "label": "AutoOpen",
+        "kind": "state"
+      },
+      {
+        "label": "CreateEmail",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "PDFOptions",
+        "kind": "attr",
+        "attr": "source"
+      },
+      {
+        "label": "PDFSaveType",
+        "kind": "text"
+      },
+      {
+        "label": "Pages",
+        "kind": "attr",
+        "attr": "AllPages"
+      },
+      {
+        "label": "allowScreenReader",
+        "kind": "attr",
+        "attr": "allowScreenReader"
+      },
+      {
+        "label": "enableCopying",
+        "kind": "attr",
+        "attr": "enableCopying"
+      },
+      {
+        "label": "controlEditing",
+        "kind": "attr",
+        "attr": "controlEditing"
+      },
+      {
+        "label": "controlPrinting",
+        "kind": "attr",
+        "attr": "controlPrinting"
+      },
+      {
+        "label": "requireControlEditPassword",
+        "kind": "attr",
+        "attr": "requireControlEditPassword"
+      },
+      {
+        "label": "requireOpenPassword",
+        "kind": "attr",
+        "attr": "requireOpenPassword"
+      },
+      {
+        "label": "magnification",
+        "kind": "attr",
+        "attr": "magnification"
+      },
+      {
+        "label": "pageLayout",
+        "kind": "attr",
+        "attr": "pageLayout"
+      },
+      {
+        "label": "show",
+        "kind": "attr",
+        "attr": "show"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><Option state=\"{{1}}\"/><CreateDirectories state=\"{{2}}\"/><Restore state=\"{{3}}\"/><AutoOpen state=\"{{4}}\"/><CreateEmail state=\"{{5}}\"/><UniversalPathList>{{6}}</UniversalPathList><PDFOptions source=\"{{7}}\"><PDFSaveType>{{8}}</PDFSaveType><Document><Pages AllPages=\"{{9}}\"/></Document><Security allowScreenReader=\"{{10}}\" enableCopying=\"{{11}}\" controlEditing=\"{{12}}\" controlPrinting=\"{{13}}\" requireControlEditPassword=\"{{14}}\" requireOpenPassword=\"{{15}}\"/><View magnification=\"{{16}}\" pageLayout=\"{{17}}\" show=\"{{18}}\"/></PDFOptions>",
+    "id": "144"
+  },
+  "Save Records as Snapshot Link": {
+    "paramSpec": [
+      {
+        "label": "CreateDirectories",
+        "kind": "state"
+      },
+      {
+        "label": "CreateEmail",
+        "kind": "state"
+      },
+      {
+        "label": "SaveType",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      }
+    ],
+    "skeleton": "<CreateDirectories state=\"{{0}}\"/><CreateEmail state=\"{{1}}\"/><SaveType value=\"{{2}}\"/><UniversalPathList>{{3}}</UniversalPathList>",
+    "id": "152"
+  },
+  "Save a Copy as": {
+    "paramSpec": [
+      {
+        "label": "CreateDirectories",
+        "kind": "state"
+      },
+      {
+        "label": "AutoOpen",
+        "kind": "state"
+      },
+      {
+        "label": "CreateEmail",
+        "kind": "state"
+      },
+      {
+        "label": "SaveAsType",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<CreateDirectories state=\"{{0}}\"/><AutoOpen state=\"{{1}}\"/><CreateEmail state=\"{{2}}\"/><SaveAsType value=\"{{3}}\"/>",
+    "id": "37"
+  },
+  "Save a Copy as Add-on Package": {
+    "paramSpec": [
+      {
+        "label": "LinkAvail",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<LinkAvail state=\"{{0}}\"/>",
+    "id": "96"
+  },
+  "Save a Copy as XML": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "OutputEntireBinaryData",
+        "kind": "state"
+      },
+      {
+        "label": "SpecifyJSONOptions",
+        "kind": "state"
+      },
+      {
+        "label": "UniversalPathList",
+        "kind": "text"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      },
+      {
+        "label": "SaXML",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/><OutputEntireBinaryData state=\"{{1}}\"/><SpecifyJSONOptions state=\"{{2}}\"/><UniversalPathList>{{3}}</UniversalPathList>{{4}}<SaXML>{{5}}</SaXML>",
+    "id": "3"
+  },
+  "Scroll Window": {
+    "paramSpec": [
+      {
+        "label": "ScrollOperation",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<ScrollOperation value=\"{{0}}\"/>",
+    "id": "81"
+  },
+  "Select All": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "50"
+  },
+  "Select Dictionaries": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "108"
+  },
+  "Select Window": {
+    "paramSpec": [
+      {
+        "label": "LimitToWindowsOfCurrentFile",
+        "kind": "state"
+      },
+      {
+        "label": "Window",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Name",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<LimitToWindowsOfCurrentFile state=\"{{0}}\"/><Window value=\"{{1}}\"/><Name>{{2}}</Name>",
+    "id": "123"
+  },
+  "Send DDE Execute": {
+    "paramSpec": [
+      {
+        "label": "ContentType",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "ServiceName",
+        "kind": "calc"
+      },
+      {
+        "label": "Topic",
+        "kind": "calc"
+      },
+      {
+        "label": "Command",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<ContentType value=\"{{0}}\"/><ServiceName>{{1}}</ServiceName><Topic>{{2}}</Topic><Command>{{3}}</Command>",
+    "id": "64"
+  },
+  "Send Event": {
+    "paramSpec": [
+      {
+        "label": "ContentType",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Text",
+        "kind": "text"
+      },
+      {
+        "label": "CopyResultToClipboard",
+        "kind": "attr",
+        "attr": "CopyResultToClipboard"
+      },
+      {
+        "label": "WaitForCompletion",
+        "kind": "attr",
+        "attr": "WaitForCompletion"
+      },
+      {
+        "label": "BringTargetToForeground",
+        "kind": "attr",
+        "attr": "BringTargetToForeground"
+      },
+      {
+        "label": "class",
+        "kind": "attr",
+        "attr": "class"
+      }
+    ],
+    "skeleton": "<ContentType value=\"{{0}}\"/><Text>{{1}}</Text><Event CopyResultToClipboard=\"{{2}}\" WaitForCompletion=\"{{3}}\" BringTargetToForeground=\"{{4}}\" TargetName=\"\" id=\"odoc\" class=\"{{5}}\"/>",
+    "id": "57"
+  },
+  "Send Mail": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "To",
+        "kind": "calc"
+      },
+      {
+        "label": "Cc",
+        "kind": "calc"
+      },
+      {
+        "label": "Bcc",
+        "kind": "calc"
+      },
+      {
+        "label": "Subject",
+        "kind": "calc"
+      },
+      {
+        "label": "Message",
+        "kind": "calc"
+      },
+      {
+        "label": "MultipleEmails",
+        "kind": "state"
+      },
+      {
+        "label": "SendViaSMTP",
+        "kind": "state"
+      },
+      {
+        "label": "SendViaOAuthAuthentication",
+        "kind": "state"
+      },
+      {
+        "label": "SMTPEncryptionType",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "SMTPAuthenticationType",
+        "kind": "attr",
+        "attr": "type"
+      },
+      {
+        "label": "OAuthProvider",
+        "kind": "attr",
+        "attr": "type"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><To UseFoundSet=\"False\">{{1}}</To><Cc UseFoundSet=\"False\">{{2}}</Cc><Bcc UseFoundSet=\"False\">{{3}}</Bcc><Subject>{{4}}</Subject><Message>{{5}}</Message><MultipleEmails state=\"{{6}}\"/><SendViaSMTP state=\"{{7}}\"/><SendViaOAuthAuthentication state=\"{{8}}\"/><SMTPEncryptionType type=\"{{9}}\"/><SMTPAuthenticationType type=\"{{10}}\"/><OAuthProvider type=\"{{11}}\"/>",
+    "id": "63"
+  },
+  "Set AI Call Logging": {
+    "paramSpec": [
+      {
+        "label": "Set",
+        "kind": "state"
+      },
+      {
+        "label": "LLMDebugLog",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Set state=\"{{0}}\"/><LLMDebugLog>{{1}}</LLMDebugLog>",
+    "id": "217"
+  },
+  "Set Data File Position": {
+    "paramSpec": [
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "{{0}}",
+    "id": "195"
+  },
+  "Set Dictionary": {
+    "paramSpec": [
+      {
+        "label": "MainDictionary",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<MainDictionary value=\"{{0}}\"/>",
+    "id": "209"
+  },
+  "Set Error Logging": {
+    "paramSpec": [
+      {
+        "label": "Option",
+        "kind": "state"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Option state=\"{{0}}\"/>{{1}}",
+    "id": "200"
+  },
+  "Set Field By Name": {
+    "paramSpec": [
+      {
+        "label": "Result",
+        "kind": "calc"
+      },
+      {
+        "label": "TargetName",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Result>{{0}}</Result><TargetName>{{1}}</TargetName>",
+    "id": "147"
+  },
+  "Set Layout Object Animation": {
+    "paramSpec": [
+      {
+        "label": "Set",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<Set state=\"{{0}}\"/>",
+    "id": "168"
+  },
+  "Set Multi-User": {
+    "paramSpec": [
+      {
+        "label": "MultiUser",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<MultiUser value=\"{{0}}\"/>",
+    "id": "84"
+  },
+  "Set Next Serial Value": {
+    "paramSpec": [
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "{{0}}{{1}}",
+    "id": "116"
+  },
+  "Set Revert Transaction on Error": {
+    "paramSpec": [
+      {
+        "label": "Set",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<Set state=\"{{0}}\"/>",
+    "id": "223"
+  },
+  "Set Selection": {
+    "paramSpec": [
+      {
+        "label": "StartPosition",
+        "kind": "calc"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<StartPosition>{{0}}</StartPosition>{{1}}",
+    "id": "130"
+  },
+  "Set Session Identifier": {
+    "paramSpec": [
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "{{0}}",
+    "id": "208"
+  },
+  "Set Use System Formats": {
+    "paramSpec": [
+      {
+        "label": "Set",
+        "kind": "state"
+      }
+    ],
+    "skeleton": "<Set state=\"{{0}}\"/>",
+    "id": "94"
+  },
+  "Set Web Viewer": {
+    "paramSpec": [
+      {
+        "label": "Action",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "ObjectName",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<Action value=\"{{0}}\"/><ObjectName>{{1}}</ObjectName>",
+    "id": "146"
+  },
+  "Set Window Title": {
+    "paramSpec": [
+      {
+        "label": "LimitToWindowsOfCurrentFile",
+        "kind": "state"
+      },
+      {
+        "label": "Window",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Name",
+        "kind": "calc"
+      }
+    ],
+    "skeleton": "<LimitToWindowsOfCurrentFile state=\"{{0}}\"/><Window value=\"{{1}}\"/><Name>{{2}}</Name>",
+    "id": "124"
+  },
+  "Set Zoom Level": {
+    "paramSpec": [
+      {
+        "label": "Lock",
+        "kind": "state"
+      },
+      {
+        "label": "Zoom",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<Lock state=\"{{0}}\"/><Zoom value=\"{{1}}\"/>",
+    "id": "97"
+  },
+  "Show Custom Dialog": {
+    "paramSpec": [
+      {
+        "label": "Title",
+        "kind": "calc"
+      },
+      {
+        "label": "Message",
+        "kind": "calc"
+      },
+      {
+        "label": "Button",
+        "kind": "calc"
+      },
+      {
+        "label": "Button2",
+        "kind": "attr",
+        "attr": "CommitState"
+      },
+      {
+        "label": "Button3",
+        "kind": "attr",
+        "attr": "CommitState"
+      }
+    ],
+    "skeleton": "<Title>{{0}}</Title><Message>{{1}}</Message><Buttons><Button CommitState=\"True\">{{2}}</Button><Button CommitState=\"{{3}}\"/><Button CommitState=\"{{4}}\"/></Buttons>",
+    "id": "87"
+  },
+  "Show Omitted Only": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "27"
+  },
+  "Show/Hide Menubar": {
+    "paramSpec": [
+      {
+        "label": "Lock",
+        "kind": "state"
+      },
+      {
+        "label": "ShowHide",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<Lock state=\"{{0}}\"/><ShowHide value=\"{{1}}\"/>",
+    "id": "166"
+  },
+  "Show/Hide Text Ruler": {
+    "paramSpec": [
+      {
+        "label": "ShowHide",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<ShowHide value=\"{{0}}\"/>",
+    "id": "92"
+  },
+  "Show/Hide Toolbars": {
+    "paramSpec": [
+      {
+        "label": "IncludeEditRecordToolbar",
+        "kind": "state"
+      },
+      {
+        "label": "Lock",
+        "kind": "state"
+      },
+      {
+        "label": "ShowHide",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<IncludeEditRecordToolbar state=\"{{0}}\"/><Lock state=\"{{1}}\"/><ShowHide value=\"{{2}}\"/>",
+    "id": "29"
+  },
+  "Sort Records by Field": {
+    "paramSpec": [
+      {
+        "label": "SortRecordsByField",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<SortRecordsByField value=\"{{0}}\"/>{{1}}",
+    "id": "154"
+  },
+  "Speak": {
+    "paramSpec": [
+      {
+        "label": "WaitForCompletion",
+        "kind": "attr",
+        "attr": "WaitForCompletion"
+      },
+      {
+        "label": "VoiceId",
+        "kind": "attr",
+        "attr": "VoiceId"
+      }
+    ],
+    "skeleton": "<SpeechOptions WaitForCompletion=\"{{0}}\" VoiceId=\"{{1}}\"/>",
+    "id": "66"
+  },
+  "Spelling Options": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "107"
+  },
+  "Trigger Claris Connect Flow": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "DontEncodeURL",
+        "kind": "state"
+      },
+      {
+        "label": "SelectAll",
+        "kind": "state"
+      },
+      {
+        "label": "VerifySSLCertificates",
+        "kind": "state"
+      },
+      {
+        "label": "Flow",
+        "kind": "text"
+      },
+      {
+        "label": "Auth",
+        "kind": "calc"
+      },
+      {
+        "label": "CURLOptions",
+        "kind": "calc"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      },
+      {
+        "label": "Text",
+        "kind": "text"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><DontEncodeURL state=\"{{1}}\"/><SelectAll state=\"{{2}}\"/><VerifySSLCertificates state=\"{{3}}\"/><Flow>{{4}}</Flow><Auth>{{5}}</Auth><CURLOptions>{{6}}</CURLOptions>{{7}}<Text>{{8}}</Text>{{9}}",
+    "id": "211"
+  },
+  "Truncate Table": {
+    "paramSpec": [
+      {
+        "label": "NoInteract",
+        "kind": "state"
+      },
+      {
+        "label": "BaseTable",
+        "kind": "attr",
+        "attr": "name"
+      }
+    ],
+    "skeleton": "<NoInteract state=\"{{0}}\"/><BaseTable id=\"147\" comment=\"\" name=\"{{1}}\"/>",
+    "id": "182"
+  },
+  "Undo/Redo": {
+    "paramSpec": [
+      {
+        "label": "UndoRedo",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<UndoRedo value=\"{{0}}\"/>",
+    "id": "45"
+  },
+  "Unsort Records": {
+    "paramSpec": [],
+    "skeleton": "",
+    "id": "21"
+  },
+  "View As": {
+    "paramSpec": [
+      {
+        "label": "View",
+        "kind": "attr",
+        "attr": "value"
+      }
+    ],
+    "skeleton": "<View value=\"{{0}}\"/>",
+    "id": "30"
+  },
+  "Write to Data File": {
+    "paramSpec": [
+      {
+        "label": "AppendLineFeed",
+        "kind": "state"
+      },
+      {
+        "label": "DataSourceType",
+        "kind": "attr",
+        "attr": "value"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      },
+      {
+        "label": "Field",
+        "kind": "field"
+      }
+    ],
+    "skeleton": "<AppendLineFeed state=\"{{0}}\"/><DataSourceType value=\"{{1}}\"/>{{2}}{{3}}",
+    "id": "192"
+  }
+}
