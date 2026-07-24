@@ -64,20 +64,50 @@ function extractSnippet(text) {
   return text.slice(start, end + endTag.length);
 }
 
+// Windows: read FileMaker's private clipboard formats (Mac-XMSS etc.) via PowerShell.
+function readFmClipboardWindows(context) {
+  const ps1 = path.join(context.extensionPath, 'read-fm-clipboard.ps1');
+  const out = cp.execFileSync('powershell.exe',
+    ['-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass', '-File', ps1],
+    { encoding: 'utf8', timeout: 10000, windowsHide: true });
+  return extractSnippet(out || '');
+}
+
+// macOS: the same private formats live on the pasteboard under four-char codes
+// (the Mac- prefix is Windows-only) — XMSS for script steps, XMSC scripts, etc.
+// osascript coerces the clipboard to that raw type and prints «data XMSS<hex>»;
+// hex-decode to the UTF-8 XML (may carry a 4-byte length header, which
+// extractSnippet skips by locating the <fmxmlsnippet substring).
+const MAC_CLIP_TYPES = ['XMSS', 'XMSC', 'XMTB', 'XMFD', 'XMFN', 'XMVL', 'XML2'];
+const GL = '«'; // «
+const GR = '»'; // »
+function readFmClipboardMac() {
+  for (const t of MAC_CLIP_TYPES) {
+    let out;
+    try {
+      out = cp.execFileSync('osascript', ['-e', 'the clipboard as ' + GL + 'class ' + t + GR],
+        { encoding: 'utf8', timeout: 10000 });
+    } catch (e) {
+      continue; // this type isn't on the clipboard
+    }
+    const m = new RegExp(GL + 'data ' + t + '([0-9A-Fa-f]*)' + GR).exec(out || '');
+    if (!m || !m[1]) continue;
+    const snippet = extractSnippet(Buffer.from(m[1], 'hex').toString('utf8'));
+    if (snippet) return snippet;
+  }
+  return null;
+}
+
 async function readFileMakerClipboard(context) {
   const text = await vscode.env.clipboard.readText();
   const snippet = extractSnippet(text || '');
   if (snippet) return snippet;
-  // Fallback: FileMaker's private clipboard formats (Mac-XMSS etc.) via PowerShell.
-  const ps1 = path.join(context.extensionPath, 'read-fm-clipboard.ps1');
+  // Not on the plain-text clipboard: read FileMaker's private formats per OS.
   try {
-    const out = cp.execFileSync('powershell.exe',
-      ['-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass', '-File', ps1],
-      { encoding: 'utf8', timeout: 10000, windowsHide: true });
-    return extractSnippet(out || '');
-  } catch (e) {
-    return null;
-  }
+    if (process.platform === 'win32') return readFmClipboardWindows(context);
+    if (process.platform === 'darwin') return readFmClipboardMac();
+  } catch (e) { /* fall through to null */ }
+  return null;
 }
 
 // --- commands -------------------------------------------------------------------
