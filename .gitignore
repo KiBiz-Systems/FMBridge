@@ -1,5 +1,7 @@
 node_modules/
 *.vsix
+# ...except the published macOS build under mac/ (see README "Install on macOS").
+!mac/*.vsix
 .fmbridge/
 
 # Scratch / client scripts — never publish (may contain proprietary schema)

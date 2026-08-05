@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const cp = require('child_process');
 
-const { xmlToText, textToXml, BUILTINS } = require('./lib/steps');
+const { xmlToText, textToXml, BUILTINS, KEYS } = require('./lib/steps');
 const { FUNCTIONS, GET_FLAGS, EXTRA_STEP_NAMES } = require('./lib/fmdata');
 
 // --- template store (workspace .fmbridge/templates.json) --------------------
@@ -98,6 +98,23 @@ function readFmClipboardMac() {
   return null;
 }
 
+// macOS write path. FileMaker's Script Workspace on macOS pastes ONLY from its
+// private pasteboard type — a plain-text <fmxmlsnippet> clipboard is silently
+// ignored, which is why Cmd+Alt+B appeared to do nothing while the same text
+// clipboard works on Windows FM. Mirror of readFmClipboardMac: an AppleScript
+// raw-data literal «data XMSS<hex>». textToXml only ever emits top-level <Step>
+// objects (whole-script copies paste back as steps), so XMSS is always the right
+// class here. Sent on stdin, not -e: hex doubles the payload and a large script
+// would blow past the argv size limit.
+function writeFmClipboardMac(xml) {
+  const hex = Buffer.from(xml, 'utf8').toString('hex').toUpperCase();
+  cp.execFileSync('osascript', ['-'], {
+    input: 'set the clipboard to ' + GL + 'data XMSS' + hex + GR,
+    encoding: 'utf8',
+    timeout: 15000,
+  });
+}
+
 async function readFileMakerClipboard(context) {
   const text = await vscode.env.clipboard.readText();
   const snippet = extractSnippet(text || '');
@@ -150,9 +167,24 @@ async function copyAsFileMakerXml() {
     vscode.window.showErrorMessage('FM Bridge: ' + errors.length + ' error(s). First: ' + errors[0]);
     return;
   }
+  // Text first, so a failed native write still leaves the XML on the clipboard
+  // rather than nothing. On macOS the native write then replaces it (AppleScript's
+  // `set the clipboard to` sets a single flavor) because that is the only flavor
+  // FileMaker will paste from there.
   await vscode.env.clipboard.writeText(xml);
-  vscode.window.showInformationMessage(
-    'FM Bridge: ' + stepCount + ' steps copied as FileMaker XML - switch to Script Workspace and paste (Ctrl+V).');
+  let warning = '';
+  if (process.platform === 'darwin') {
+    try {
+      writeFmClipboardMac(xml);
+    } catch (e) {
+      warning = ' (warning: could not set FileMaker\'s pasteboard type - ' +
+        'the XML is on the clipboard as text, which FileMaker for macOS will not paste)';
+    }
+  }
+  const msg = 'FM Bridge: ' + stepCount + ' steps copied as FileMaker XML - ' +
+    'switch to Script Workspace and paste (' + KEYS.fmPaste + ').' + warning;
+  if (warning) vscode.window.showWarningMessage(msg);
+  else vscode.window.showInformationMessage(msg);
 }
 
 // --- autocomplete ------------------------------------------------------------------
@@ -182,7 +214,7 @@ function buildCompletionProvider() {
               ? new vscode.SnippetString(name + ' [ ' + spec.map((p, i) => p.label + ': ${' + (i + 1) + '}').join(' ; ') + ' ]')
               : name;
           } else {
-            item.detail = builtinNames.includes(name) ? 'built-in step' : 'step (copy from FileMaker once to enable Ctrl+Alt+B)';
+            item.detail = builtinNames.includes(name) ? 'built-in step' : 'step (copy from FileMaker once to enable ' + KEYS.copy + ')';
             item.insertText = snippetForBuiltin(name);
           }
           items.push(item);

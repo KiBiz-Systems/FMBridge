@@ -12,22 +12,39 @@ Open the Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`), search **FM Bridge** 
 
 Coverage for ~220 script steps is bundled in, so it works immediately with no setup.
 
-> **Platform note:** full clipboard reading (FileMaker's private clipboard formats) is
-> **Windows-only** — it shells out to PowerShell. On macOS/Linux, `Ctrl+Alt+V` still works when
-> FileMaker's clipboard XML is available as plain text; otherwise it falls back to a normal paste.
+### Install on macOS
+
+A prebuilt macOS-verified build is committed at [`mac/fm-bridge-0.1.19.vsix`](mac/). Install it
+with your editor's CLI, then run **Developer: Reload Window** — installing a `.vsix` does not
+hot-swap an already-running extension:
+
+```
+antigravity-ide --install-extension mac/fm-bridge-0.1.19.vsix   # or: code --install-extension …
+```
+
+Both clipboard directions are verified against FileMaker Pro on macOS. The same `.vsix` also
+installs on Windows — the `mac/` folder just marks which build was Mac-tested.
+
+> **Platform note:** FileMaker's *private* clipboard formats are reached per-OS — Windows via
+> PowerShell, macOS via `osascript`. macOS needs this in **both** directions: FileMaker for Mac
+> pastes only from its own pasteboard type, so the copy-out direction writes that type rather
+> than plain text (FileMaker for Windows accepts plain text either way). Linux has neither path,
+> so there `Ctrl+Alt+V` only works when FileMaker's XML is already on the clipboard as plain
+> text, and pasting back into FileMaker isn't supported.
 
 ## Shortcuts
 
-| Keys | Command | Direction |
-|---|---|---|
-| `Ctrl+Alt+V` | Paste FileMaker Clipboard as Script Text | FileMaker → editor |
-| `Ctrl+Alt+B` | Copy as FileMaker XML | editor → FileMaker (in `.fmscript` files) |
+| Windows / Linux | macOS | Command | Direction |
+|---|---|---|---|
+| `Ctrl+Alt+V` | `Cmd+Alt+V` | Paste FileMaker Clipboard as Script Text | FileMaker → editor |
+| `Ctrl+Alt+B` | `Cmd+Alt+B` | Copy as FileMaker XML | editor → FileMaker (in `.fmscript` files) |
 
-**Workflow:** copy steps in FileMaker's Script Workspace (`Ctrl+C`) → `Ctrl+Alt+V` in VS Code
-to get readable text → edit (or let AI edit) → select nothing (whole file) or select lines →
-`Ctrl+Alt+B` → switch to Script Workspace → `Ctrl+V`.
+**Workflow:** copy steps in FileMaker's Script Workspace (`Ctrl+C` / `Cmd+C`) → `Ctrl+Alt+V`
+(`Cmd+Alt+V`) in VS Code to get readable text → edit (or let AI edit) → select nothing (whole
+file) or select lines → `Ctrl+Alt+B` (`Cmd+Alt+B`) → switch to Script Workspace →
+`Ctrl+V` (`Cmd+V`).
 
-If the clipboard isn't FileMaker XML, `Ctrl+Alt+V` falls back to a normal paste.
+If the clipboard isn't FileMaker XML, the paste shortcut falls back to a normal paste.
 
 ## How coverage works
 
@@ -70,11 +87,13 @@ Plain JavaScript, zero runtime dependencies. Node.js is the only requirement (vs
 on demand via `npx`).
 
 ```
-npm test               # round-trip stability check (text -> XML -> text -> XML) on real fixtures
-npm run sync-templates # fold this workspace's learned templates into the bundled starter set
-npm run package        # build fm-bridge-<version>.vsix
-npm run install-ide    # install the newest .vsix into Antigravity IDE
-npm run deploy         # all of the above in order
+npm test                 # round-trip stability check (text -> XML -> text -> XML) on real fixtures
+npm run sync-templates   # fold this workspace's learned templates into the bundled starter set
+npm run package          # build fm-bridge-<version>.vsix
+npm run install-ide      # install the newest .vsix into Antigravity IDE (Windows, PowerShell)
+npm run install-ide:mac  # same, on macOS/Linux (scripts/install.sh)
+npm run deploy           # all of the above in order
+npm run deploy:mac       # deploy using the macOS installer
 ```
 
 After installing, run **Developer: Reload Window** in the IDE. Bump `version` in `package.json`

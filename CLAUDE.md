@@ -77,6 +77,21 @@ Learned-template caveat: templates refill slots by parameter *label*, so a step 
 depends on child order with duplicate labels could rebuild incorrectly (none known in practice —
 but keep it in mind when touching `slotElement`/`fillTemplate`).
 
+## Clipboard access (platform-specific, both directions)
+
+**Writing (editor → FM) is asymmetric between platforms — do not "simplify" it to one
+`writeText` call.** FileMaker for **Windows** pastes happily from a plain-text
+`<fmxmlsnippet>` clipboard, but FileMaker for **macOS** pastes ONLY from its private
+pasteboard type and silently ignores a text clipboard — `Cmd+Alt+B` appeared to succeed
+(toast and all) while Script Workspace refused the paste. `writeFmClipboardMac()` therefore
+sets an AppleScript raw-data literal `«data XMSS<uppercase hex>»` via `osascript`, sent on
+**stdin** rather than `-e` (hex doubles the payload; a large script overruns the argv limit).
+`textToXml` only ever emits top-level `<Step>` objects, so `XMSS` is always the correct class
+on the write side (`XMSC` would be for whole scripts). `writeText` still runs first so a
+failed native write leaves the XML on the clipboard as text instead of nothing — note that
+AppleScript's `set the clipboard to` sets a *single* flavor, so on success the text flavor is
+replaced, not augmented.
+
 ## Clipboard reading (two paths)
 
 `Ctrl+Alt+V` first checks the plain-text clipboard for `<fmxmlsnippet`. If absent, it shells out
