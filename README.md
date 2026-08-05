@@ -38,10 +38,10 @@ Coverage for 216 script steps is bundled in, so it works immediately with no set
 
 ## Shortcuts
 
-| Windows / Linux | macOS | Command | Direction |
+| Windows | macOS | Command | Direction |
 |---|---|---|---|
-| `Ctrl+Alt+V` | `Cmd+Alt+V` | Paste FileMaker Clipboard as Script Text | FileMaker → editor |
-| `Ctrl+Alt+B` | `Cmd+Alt+B` | Copy as FileMaker XML | editor → FileMaker |
+| `Ctrl+Alt+V` | `Cmd+Option+V` | Paste FileMaker Clipboard as Script Text | FileMaker → editor |
+| `Ctrl+Alt+B` | `Cmd+Option+B` | Copy as FileMaker XML | editor → FileMaker |
 
 Both are also in the Command Palette as **FM Bridge: …**. The copy-out shortcut is active only
 in `.fmscript` files; the paste shortcut works anywhere and falls back to an ordinary paste when
@@ -50,9 +50,9 @@ the clipboard is not FileMaker content, so it is always safe to press.
 ### Workflow
 
 1. In FileMaker's Script Workspace, select steps and copy (`Ctrl+C` / `Cmd+C`)
-2. In your editor, open a `.fmscript` file and press `Ctrl+Alt+V` / `Cmd+Alt+V`
+2. In your editor, open a `.fmscript` file and press `Ctrl+Alt+V` / `Cmd+Option+V`
 3. Edit the text — or let an AI assistant edit it
-4. Select lines (or nothing, for the whole file) and press `Ctrl+Alt+B` / `Cmd+Alt+B`
+4. Select lines (or nothing, for the whole file) and press `Ctrl+Alt+B` / `Cmd+Option+B`
 5. Switch to Script Workspace and paste (`Ctrl+V` / `Cmd+V`)
 
 ## Script step coverage
