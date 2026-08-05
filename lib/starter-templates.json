@@ -3221,6 +3221,26 @@
         "kind": "calc"
       },
       {
+        "label": "SMTPEmailAddress",
+        "kind": "calc"
+      },
+      {
+        "label": "SMTPServer",
+        "kind": "calc"
+      },
+      {
+        "label": "SMTPPort",
+        "kind": "calc"
+      },
+      {
+        "label": "SMTPUserName",
+        "kind": "calc"
+      },
+      {
+        "label": "SMTPPassword",
+        "kind": "calc"
+      },
+      {
         "label": "MultipleEmails",
         "kind": "state"
       },
@@ -3248,7 +3268,7 @@
         "attr": "type"
       }
     ],
-    "skeleton": "<NoInteract state=\"{{0}}\"/><To UseFoundSet=\"False\">{{1}}</To><Cc UseFoundSet=\"False\">{{2}}</Cc><Bcc UseFoundSet=\"False\">{{3}}</Bcc><Subject>{{4}}</Subject><Message>{{5}}</Message><MultipleEmails state=\"{{6}}\"/><SendViaSMTP state=\"{{7}}\"/><SendViaOAuthAuthentication state=\"{{8}}\"/><SMTPEncryptionType type=\"{{9}}\"/><SMTPAuthenticationType type=\"{{10}}\"/><OAuthProvider type=\"{{11}}\"/>",
+    "skeleton": "<NoInteract state=\"{{0}}\"/><To UseFoundSet=\"False\">{{1}}</To><Cc UseFoundSet=\"False\">{{2}}</Cc><Bcc UseFoundSet=\"False\">{{3}}</Bcc><Subject>{{4}}</Subject><Message>{{5}}</Message><SMTPEmailAddress>{{6}}</SMTPEmailAddress><SMTPServer>{{7}}</SMTPServer><SMTPPort>{{8}}</SMTPPort><SMTPUserName>{{9}}</SMTPUserName><SMTPPassword>{{10}}</SMTPPassword><MultipleEmails state=\"{{11}}\"/><SendViaSMTP state=\"{{12}}\"/><SendViaOAuthAuthentication state=\"{{13}}\"/><SMTPEncryptionType type=\"{{14}}\"/><SMTPAuthenticationType type=\"{{15}}\"/><OAuthProvider type=\"{{16}}\"/>",
     "id": "63"
   },
   "Set AI Call Logging": {
