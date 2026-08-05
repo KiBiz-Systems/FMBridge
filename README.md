@@ -205,7 +205,7 @@ children it does not recognise, leaving a step that looks fine but has empty par
 
 ## License
 
-[MIT](LICENSE) © 2026 Kibiz Solutions.
+[MIT](LICENSE) © 2026 KiBiz Systems.
 
 Permission is granted to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the software, subject to including the copyright notice and permission notice. The
