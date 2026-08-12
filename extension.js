@@ -115,6 +115,20 @@ function writeFmClipboardMac(xml) {
   });
 }
 
+// Windows write path — the mirror of readFmClipboardWindows, and the same
+// lesson macOS taught: FileMaker resolves a paste from its own registered
+// clipboard format ("Mac-XMSS", the Mac- prefix is what FM registers on Windows
+// too) and silently ignores a clipboard that carries only text, so Ctrl+Alt+B
+// reported success while Script Workspace pasted nothing. The PowerShell helper
+// publishes the private format AND the text flavour from one DataObject, so
+// unlike macOS the plain-text clipboard survives here.
+function writeFmClipboardWindows(context, xml) {
+  const ps1 = path.join(context.extensionPath, 'write-fm-clipboard.ps1');
+  cp.execFileSync('powershell.exe',
+    ['-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass', '-File', ps1, '-Format', 'Mac-XMSS'],
+    { input: Buffer.from(xml, 'utf8'), timeout: 15000, windowsHide: true });
+}
+
 async function readFileMakerClipboard(context) {
   const text = await vscode.env.clipboard.readText();
   const snippet = extractSnippet(text || '');
@@ -156,7 +170,7 @@ async function pasteFromFileMaker(context) {
   }
 }
 
-async function copyAsFileMakerXml() {
+async function copyAsFileMakerXml(context) {
   const editor = vscode.window.activeTextEditor;
   if (!editor) return;
   const sel = editor.selection;
@@ -179,6 +193,13 @@ async function copyAsFileMakerXml() {
     } catch (e) {
       warning = ' (warning: could not set FileMaker\'s pasteboard type - ' +
         'the XML is on the clipboard as text, which FileMaker for macOS will not paste)';
+    }
+  } else if (process.platform === 'win32') {
+    try {
+      writeFmClipboardWindows(context, xml);
+    } catch (e) {
+      warning = ' (warning: could not set FileMaker\'s clipboard format - ' +
+        'the XML is on the clipboard as text, which FileMaker for Windows will not paste)';
     }
   }
   const msg = 'FM Bridge: ' + stepCount + ' steps copied as FileMaker XML - ' +
@@ -337,7 +358,7 @@ function updateSealedFolds(editor) {
 function activate(context) {
   context.subscriptions.push(
     vscode.commands.registerCommand('fmBridge.pasteFromFileMaker', () => pasteFromFileMaker(context)),
-    vscode.commands.registerCommand('fmBridge.copyAsFileMakerXml', copyAsFileMakerXml),
+    vscode.commands.registerCommand('fmBridge.copyAsFileMakerXml', () => copyAsFileMakerXml(context)),
     vscode.languages.registerCompletionItemProvider({ language: 'fmscript' }, buildCompletionProvider()),
     vscode.window.onDidChangeActiveTextEditor(updateSealedFolds),
     vscode.window.onDidChangeTextEditorSelection((e) => updateSealedFolds(e.textEditor)),

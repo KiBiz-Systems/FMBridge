@@ -1,6 +1,9 @@
 .vscodeignore
 .gitignore
+.github/**
 test/**
+test.fmscript
+test.html
 scripts/**
 *.vsix
 .fmbridge/**

@@ -11,21 +11,26 @@ against FileMaker Pro on each platform.
 
 ## Install
 
-Download [`fm-bridge-0.1.20.vsix`](fm-bridge-0.1.20.vsix) from this repository and install it
-with your editor's CLI:
+Download the latest build — [**fm-bridge.vsix**](https://github.com/KiBiz-Systems/FMBridge/releases/latest/download/fm-bridge.vsix)
+— and install it with your editor's CLI:
 
 ```sh
+curl -LO https://github.com/KiBiz-Systems/FMBridge/releases/latest/download/fm-bridge.vsix
+
 # VS Code
-code --install-extension fm-bridge-0.1.20.vsix
+code --install-extension fm-bridge.vsix
 
 # Antigravity IDE
-antigravity-ide --install-extension fm-bridge-0.1.20.vsix
+antigravity-ide --install-extension fm-bridge.vsix
 
 # Cursor / VSCodium / Windsurf and other forks
-cursor --install-extension fm-bridge-0.1.20.vsix
+cursor --install-extension fm-bridge.vsix
 ```
 
 Or from the editor UI: **Extensions** view → `…` menu → **Install from VSIX…**
+
+That download link always serves the newest release. Earlier builds, and what changed in each,
+are on the [releases page](https://github.com/KiBiz-Systems/FMBridge/releases).
 
 Then run **Developer: Reload Window**. This step is required — installing a `.vsix` does not
 hot-swap an extension that is already running.
@@ -154,14 +159,18 @@ needs its own path. This is handled automatically:
 
 | | Read (FileMaker → editor) | Write (editor → FileMaker) |
 |---|---|---|
-| **Windows** | PowerShell reads the `Mac-XMSS` clipboard format | plain-text clipboard (FileMaker for Windows accepts it) |
+| **Windows** | PowerShell reads the `Mac-XMSS` clipboard format | PowerShell writes the `Mac-XMSS` clipboard format, plus plain text |
 | **macOS** | `osascript` reads the `XMSS` pasteboard type | `osascript` writes the `XMSS` pasteboard type |
 | **Linux** | plain text only, if FileMaker XML is already on the clipboard | not supported |
 
-The macOS write path is not optional: FileMaker for Mac pastes **only** from its own pasteboard
-type and silently ignores a text clipboard. One consequence — after `Cmd+Alt+B` on macOS the
-clipboard holds FileMaker's format rather than text, so it will not paste as XML into a text
-editor.
+The private write path is not optional on either desktop OS: FileMaker pastes **only** from its
+own clipboard format and ignores a text-only clipboard without reporting anything, so the copy
+command looks like it worked while Script Workspace pastes nothing. (Through 0.1.20 the Windows
+side wrote text only, which is exactly what that looked like.)
+
+One difference between the two: on Windows both flavours are published together, so the XML also
+pastes into a text editor. On macOS AppleScript's `set the clipboard to` sets a *single* flavour,
+so after `Cmd+Option+B` the clipboard holds FileMaker's format instead of text.
 
 ## Build, test, deploy
 

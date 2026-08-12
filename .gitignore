@@ -1,9 +1,10 @@
 node_modules/
+# Builds live on GitHub Releases, not in the repo — the tag push builds and uploads them
+# (.github/workflows/release.yml), and README links to the version-free latest-download URL.
 *.vsix
-# ...except the published release at the repo root, which README links to for
-# download. One build serves both Windows and macOS. Delete superseded ones.
-!/fm-bridge-*.vsix
 .fmbridge/
 
 # Scratch / client scripts — never publish (may contain proprietary schema)
 scripts/*.fmscript
+test.fmscript
+test.html

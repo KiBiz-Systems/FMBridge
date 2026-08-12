@@ -295,9 +295,13 @@
         "label": "Window",
         "kind": "attr",
         "attr": "value"
+      },
+      {
+        "label": "Name",
+        "kind": "calc"
       }
     ],
-    "skeleton": "<LimitToWindowsOfCurrentFile state=\"{{0}}\"/><Window value=\"{{1}}\"/>",
+    "skeleton": "<LimitToWindowsOfCurrentFile state=\"{{0}}\"/><Window value=\"{{1}}\"/><Name>{{2}}</Name>",
     "id": "121"
   },
   "Commit Records/Requests": {
@@ -1897,11 +1901,19 @@
         "kind": "state"
       },
       {
+        "label": "CURLOptions",
+        "kind": "calc"
+      },
+      {
+        "label": "Calculation",
+        "kind": "calc"
+      },
+      {
         "label": "Field",
         "kind": "field"
       }
     ],
-    "skeleton": "<NoInteract state=\"{{0}}\"/><DontEncodeURL state=\"{{1}}\"/><SelectAll state=\"{{2}}\"/><VerifySSLCertificates state=\"{{3}}\"/>{{4}}",
+    "skeleton": "<NoInteract state=\"{{0}}\"/><DontEncodeURL state=\"{{1}}\"/><SelectAll state=\"{{2}}\"/><VerifySSLCertificates state=\"{{3}}\"/><CURLOptions>{{4}}</CURLOptions>{{5}}{{6}}",
     "id": "160"
   },
   "Install Menu Set": {

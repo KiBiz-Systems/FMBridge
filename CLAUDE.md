@@ -27,6 +27,23 @@ node test/roundtrip.test.js path\to\file.fmscript   # test against a specific sc
 **Always bump `version` in package.json before packaging** — the IDE may keep serving a cached
 old build otherwise.
 
+## Publishing a release
+
+Builds are **not** committed to the repo; they live on GitHub Releases.
+`.github/workflows/release.yml` runs on a `v*` tag push: it fails fast unless the tag equals
+package.json's `version`, runs `npm test`, packages, and uploads the .vsix twice — as
+`fm-bridge-<version>.vsix` (the archive copy) and as `fm-bridge.vsix`, a version-free name so
+`https://github.com/KiBiz-Systems/FMBridge/releases/latest/download/fm-bridge.vsix` always
+resolves to the newest build. README links to that URL, so a release needs no README edit.
+
+```
+npm run sync-templates && npm test   # fold in learnings, verify (do this BEFORE tagging)
+git tag v0.1.22 && git push origin main --tags
+```
+
+Re-running a tag's build (e.g. after a failed upload) is `workflow_dispatch` from the Actions tab
+with the tag name — it uploads with `--clobber` when the release already exists.
+
 ## Deployment environment (non-obvious, learned the hard way)
 
 - The target editor is **Antigravity IDE** (a VS Code fork), NOT plain VS Code. The `code` CLI on
@@ -69,6 +86,13 @@ attr/element parsing), `lib/fmdata.js` (FM function/Get-flag data for autocomple
    templates (workspace wins), and `saveStore()` writes only the diff from the starter set.
    `npm run sync-templates` folds this workspace's learnings into the starter file — run it
    (it's part of `npm run deploy`) before packaging a release.
+   **Copy CONFIGURED steps when capturing for the starter set.** FM omits children whose option
+   is unset, so a copy of a freshly-dragged step teaches a template with no slot for the
+   parameter that matters. `xmlToText` guards against this at runtime (a leaner paste never
+   clobbers a richer stored template — the `keepPrev` label-superset check), but through 0.1.20
+   `sync-templates.js` overwrote unconditionally: that is how the shipped `Insert from URL` lost
+   its URL and cURL-options slots and `Close Window` lost `Name`. The script now applies the same
+   superset rule and logs what it kept.
 3. **Raw passthrough**: complex steps (Insert from URL, saved find/sort criteria, Go to Layout…)
    become `#fmxml <xml>` lines (or `#fmxml64 Name <base64>` when the XML is multi-line) that
    paste back byte-identical but aren't text-editable.
@@ -79,18 +103,27 @@ but keep it in mind when touching `slotElement`/`fillTemplate`).
 
 ## Clipboard access (platform-specific, both directions)
 
-**Writing (editor → FM) is asymmetric between platforms — do not "simplify" it to one
-`writeText` call.** FileMaker for **Windows** pastes happily from a plain-text
-`<fmxmlsnippet>` clipboard, but FileMaker for **macOS** pastes ONLY from its private
-pasteboard type and silently ignores a text clipboard — `Cmd+Alt+B` appeared to succeed
-(toast and all) while Script Workspace refused the paste. `writeFmClipboardMac()` therefore
-sets an AppleScript raw-data literal `«data XMSS<uppercase hex>»` via `osascript`, sent on
-**stdin** rather than `-e` (hex doubles the payload; a large script overruns the argv limit).
-`textToXml` only ever emits top-level `<Step>` objects, so `XMSS` is always the correct class
-on the write side (`XMSC` would be for whole scripts). `writeText` still runs first so a
-failed native write leaves the XML on the clipboard as text instead of nothing — note that
-AppleScript's `set the clipboard to` sets a *single* flavor, so on success the text flavor is
-replaced, not augmented.
+**Writing (editor → FM) needs FileMaker's private clipboard format on BOTH desktop platforms —
+do not "simplify" it to one `writeText` call.** FileMaker pastes ONLY from its private format
+and silently ignores a text-only clipboard, so the copy command reports success (toast and all)
+while Script Workspace refuses the paste. This was fixed for macOS in 0.1.19 and for Windows in
+0.1.21 — the earlier claim in this file that "FileMaker for Windows pastes happily from a
+plain-text clipboard" was wrong, and cost a release.
+
+- `writeFmClipboardMac()` sets an AppleScript raw-data literal `«data XMSS<uppercase hex>»` via
+  `osascript`, sent on **stdin** rather than `-e` (hex doubles the payload; a large script
+  overruns the argv limit). AppleScript's `set the clipboard to` sets a *single* flavor, so on
+  success the text flavor is replaced, not augmented.
+- `writeFmClipboardWindows()` shells out to `write-fm-clipboard.ps1` (PowerShell, `-STA`), the
+  mirror of `read-fm-clipboard.ps1`. The XML goes in as UTF-8 bytes on **stdin** (same argv-size
+  reason) and one `DataObject` publishes both `Mac-XMSS` (a `MemoryStream`, whose bytes WinForms
+  writes verbatim — any other object type would get .NET serialization metadata wrapped around
+  it) and the text flavor, so on Windows the text clipboard survives.
+
+`textToXml` only ever emits top-level `<Step>` objects, so `XMSS`/`Mac-XMSS` is always the
+correct class on the write side (`XMSC` would be for whole scripts). `writeText` still runs
+first on both platforms so a failed native write leaves the XML on the clipboard as text
+instead of nothing.
 
 ## Clipboard reading (two paths)
 
@@ -132,6 +165,25 @@ blocks (cosmetic; ignored on rebuild). `# text` = comment step, blank line = bla
 understands (print-driver PlatformData, import field maps) — inflated verbatim on rebuild,
 omitted = option not set. Straight quotes are emitted; curly quotes are accepted on parse. A step type that is neither built-in nor learned
 cannot be authored from scratch — copy one instance from FileMaker first so it gets learned.
+
+**Parsing is deliberately more permissive than emission** (added 0.1.21, after 0.1.20 rejected
+lines that FileMaker itself displays). `xmlToText` still emits the one canonical labeled form, so
+round-trip stability is unaffected, but `textToXml` also accepts:
+- **Unlabeled positional values** — `Allow User Abort [ Off ]`, FM's own display syntax, not just
+  `[ Set: Off ]`. Only arguments with no `Label: ` prefix are placed positionally, and On/Off
+  slots reject non-booleans, so a stray value can't land in a toggle. An argument that *does*
+  carry an unknown label is still an error — that means the template is missing a parameter, and
+  silently dropping it would change the step (`looksLabeled` deliberately does not treat
+  `Products::Name` or `https://x` as labeled).
+- **Case-insensitive step names** — `Set Field by Name` resolves to `Set Field By Name`.
+  `matchStepName`'s normalizer must preserve length; the args are sliced off by name length.
+- **Omitted optional children** — `fillTemplate` drops the whole element (`dropSlotElement`),
+  then a lone `{{i}}` that is a child in its own right (`dropBareSlot`, for `field` and bare
+  `Calculation` slots), then the bare attribute. Order matters: `dropBareSlot` before
+  `dropSlotElement` would leave an empty `<CURLOptions></CURLOptions>` behind.
+
+An unrecognized step name gets a "did you mean" from `closestStepName` (edit distance, since case
+and punctuation already resolve above, so what is left is a real typo).
 
 ## Testing
 
