@@ -129,6 +129,30 @@ function writeFmClipboardWindows(context, xml) {
     { input: Buffer.from(xml, 'utf8'), timeout: 15000, windowsHide: true });
 }
 
+// Diagnostic command only — dumps whatever is currently on the Windows
+// clipboard (real FileMaker copy or our own Ctrl+Alt+B write) so the two can
+// be compared byte-for-byte to root-cause a paste that silently does nothing.
+let debugChannel;
+function dumpClipboardDebug(context) {
+  if (process.platform !== 'win32') {
+    vscode.window.showInformationMessage('FM Bridge: clipboard dump is Windows-only.');
+    return;
+  }
+  const ps1 = path.join(context.extensionPath, 'dump-clipboard.ps1');
+  let out;
+  try {
+    out = cp.execFileSync('powershell.exe',
+      ['-NoProfile', '-STA', '-ExecutionPolicy', 'Bypass', '-File', ps1],
+      { timeout: 15000, windowsHide: true }).toString('utf8');
+  } catch (e) {
+    out = 'FAILED: ' + e.message + '\n' + (e.stdout || '') + (e.stderr || '');
+  }
+  if (!debugChannel) debugChannel = vscode.window.createOutputChannel('FM Bridge Debug');
+  debugChannel.clear();
+  debugChannel.appendLine(out);
+  debugChannel.show(true);
+}
+
 async function readFileMakerClipboard(context) {
   const text = await vscode.env.clipboard.readText();
   const snippet = extractSnippet(text || '');
@@ -359,6 +383,7 @@ function activate(context) {
   context.subscriptions.push(
     vscode.commands.registerCommand('fmBridge.pasteFromFileMaker', () => pasteFromFileMaker(context)),
     vscode.commands.registerCommand('fmBridge.copyAsFileMakerXml', () => copyAsFileMakerXml(context)),
+    vscode.commands.registerCommand('fmBridge.dumpClipboardDebug', () => dumpClipboardDebug(context)),
     vscode.languages.registerCompletionItemProvider({ language: 'fmscript' }, buildCompletionProvider()),
     vscode.window.onDidChangeActiveTextEditor(updateSealedFolds),
     vscode.window.onDidChangeTextEditorSelection((e) => updateSealedFolds(e.textEditor)),

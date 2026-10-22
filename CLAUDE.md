@@ -106,19 +106,49 @@ but keep it in mind when touching `slotElement`/`fillTemplate`).
 **Writing (editor → FM) needs FileMaker's private clipboard format on BOTH desktop platforms —
 do not "simplify" it to one `writeText` call.** FileMaker pastes ONLY from its private format
 and silently ignores a text-only clipboard, so the copy command reports success (toast and all)
-while Script Workspace refuses the paste. This was fixed for macOS in 0.1.19 and for Windows in
-0.1.21 — the earlier claim in this file that "FileMaker for Windows pastes happily from a
-plain-text clipboard" was wrong, and cost a release.
+while Script Workspace refuses the paste. This was fixed for macOS in 0.1.19. Windows took three
+tries: 0.1.21 (`[System.Windows.Forms.Clipboard]::SetDataObject` with a `MemoryStream`) still
+pasted nothing despite .NET reading its own write back successfully — WinForms' `DataObject`
+marshals a `Stream` for a non-native format name through its own COM plumbing, which isn't
+guaranteed to hand the OS a plain `HGLOBAL` a native Win32 reader can trust. 0.1.23 switched to
+raw Win32 `OpenClipboard`/`SetClipboardData` (P/Invoke) to remove that ambiguity — still nothing
+pasted. The real bug only surfaced from a hex dump of a REAL FileMaker-for-Windows copy (there's
+a debug command for this, see below): the payload shape itself was wrong, not the delivery
+mechanism. Fixed in 0.1.24. The earlier claim in this file that "FileMaker for Windows pastes
+happily from a plain-text clipboard" was wrong from the start, and cost a release before that too.
 
 - `writeFmClipboardMac()` sets an AppleScript raw-data literal `«data XMSS<uppercase hex>»` via
   `osascript`, sent on **stdin** rather than `-e` (hex doubles the payload; a large script
   overruns the argv limit). AppleScript's `set the clipboard to` sets a *single* flavor, so on
-  success the text flavor is replaced, not augmented.
+  success the text flavor is replaced, not augmented. The payload here is bare XML, no header —
+  see the Windows contrast below.
 - `writeFmClipboardWindows()` shells out to `write-fm-clipboard.ps1` (PowerShell, `-STA`), the
   mirror of `read-fm-clipboard.ps1`. The XML goes in as UTF-8 bytes on **stdin** (same argv-size
-  reason) and one `DataObject` publishes both `Mac-XMSS` (a `MemoryStream`, whose bytes WinForms
-  writes verbatim — any other object type would get .NET serialization metadata wrapped around
-  it) and the text flavor, so on Windows the text clipboard survives.
+  reason). The script talks straight to the Win32 clipboard API (`OpenClipboard`/`GlobalAlloc`/
+  `SetClipboardData`/`CloseClipboard` via P/Invoke) rather than any .NET clipboard abstraction, to
+  guarantee FileMaker sees byte-identical native memory — `CF_UNICODETEXT` first (so the text
+  clipboard survives, matching the Mac behavior above) and only then `Mac-XMSS`.
+  **`Mac-XMSS` on Windows is NOT bare XML.** A hex dump of a real FileMaker-for-Windows copy
+  showed the payload is **`[4-byte little-endian length][UTF-8 XML]`** — header bytes
+  `74 27 00 00` decoded to `0x00002774` = 10100, and the buffer was exactly 10104 bytes
+  (10100 + the 4 header bytes) with `<fmxmlsnippet...` starting right at offset 4. FileMaker's
+  Windows paste routine trusts that header instead of scanning for the XML start tag (unlike our
+  own `read-fm-clipboard.ps1`/`extractSnippet`, which tolerate the header only by locating the
+  `<fmxmlsnippet` substring — they never needed to decode it). Best guess why Mac doesn't need
+  this: `GlobalAlloc`/`GlobalSize` round allocations up to a granularity boundary, so the Win32
+  buffer's reported size can exceed the real payload size by a few bytes — FileMaker can't trust
+  `GlobalSize()` alone to find the end of the XML, so it embeds an explicit length it can trust.
+  `NSPasteboard` on Mac carries each item's exact byte length as OS-level metadata outside the
+  payload, so that workaround was never needed there. **Do not "unify" the two write functions**
+  — the OS API, invocation mechanism, and payload shape are all genuinely different per platform;
+  a shared abstraction would risk leaking the length header into Mac's write or dropping it from
+  Windows'.
+- `dumpClipboardDebug()` / `dump-clipboard.ps1` (command: "FM Bridge: Dump Clipboard Diagnostics")
+  is a diagnostic-only command (Windows only) that hex-dumps whatever is currently on the
+  clipboard for every known FileMaker private format. This is how the length-header bug above was
+  actually found — comparing a real FileMaker copy's bytes against what FM Bridge wrote, rather
+  than guessing at the wire format blind. Reach for it first the next time a Windows clipboard
+  write looks like it succeeded but nothing pastes.
 
 `textToXml` only ever emits top-level `<Step>` objects, so `XMSS`/`Mac-XMSS` is always the
 correct class on the write side (`XMSC` would be for whole scripts). `writeText` still runs
