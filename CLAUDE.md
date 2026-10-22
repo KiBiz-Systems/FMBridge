@@ -21,6 +21,7 @@ npm test             # round-trip stability test (see below) — must stay green
 npm run package      # build fm-bridge-<version>.vsix via vsce (fetched on demand by npx)
 npm run install-ide  # install newest .vsix into Antigravity IDE (scripts/install.ps1)
 npm run deploy       # test + package + install-ide
+npm run sync-templates                # fold .fmbridge learnings into a version's bundled set (asks which)
 node test/roundtrip.test.js path\to\file.fmscript   # test against a specific script
 ```
 
@@ -71,10 +72,12 @@ with the tag name — it uploads with `--clobber` when the release already exist
 
 Code layout: `extension.js` (VS Code glue: commands, keybindings, completions, template store I/O),
 `lib/steps.js` (the converters — `xmlToText(xml, store)` / `textToXml(text, store)`, both pure
-functions taking a `{ templates }` store), `lib/xmlutil.js` (CDATA masking, entity handling,
-attr/element parsing), `lib/fmdata.js` (FM function/Get-flag data for autocomplete).
+functions taking a store built by `loadStore()` — `{ version, templates, learned, builtins,
+paramAliases, unavailable }`), `lib/xmlutil.js` (CDATA masking, entity handling, attr/element
+parsing), `lib/versions/` (per-FileMaker-version built-ins, starter templates and autocomplete
+data — see "FileMaker version scoping" below).
 
-1. **Built-ins** (`BUILTINS` in lib/steps.js): ~20 hand-verified bijective formatters for the
+1. **Built-ins** (`BUILTINS` in lib/versions/base/builtins.js): ~20 hand-verified bijective formatters for the
    most common steps (Set Variable, Set Field, If/Else/End If, Loop/Exit Loop If/End Loop,
    Perform Script, Show Custom Dialog, Perform Find, Go to Record, Exit Script, Pause, Enter
    Find Mode, Sort Records, Set Error Capture, Comment, bare steps).
@@ -90,11 +93,16 @@ attr/element parsing), `lib/fmdata.js` (FM function/Get-flag data for autocomple
    builtin → learned template when a builtin rejects the given args, and errors on a labeled
    arg the template has no slot for (means the template was learned from a leaner instance —
    re-paste from FileMaker to refresh it).
-   A **starter set** (`lib/starter-templates.json`, captured from real FileMaker pastes) ships
-   inside the .vsix; `loadStore()` in extension.js merges it under the workspace's own
-   templates (workspace wins), and `saveStore()` writes only the diff from the starter set.
-   `npm run sync-templates` folds this workspace's learnings into the starter file — run it
-   (it's part of `npm run deploy`) before packaging a release.
+   A **starter set** (`lib/versions/base/templates.json` plus per-version changes, captured from
+   real FileMaker pastes) ships inside the .vsix; `loadStore()` in extension.js merges the selected
+   version's set under the workspace's own templates (workspace wins), and `saveStore()` writes
+   only the diff from that set.
+   `npm run sync-templates` folds this workspace's learnings into one version's bundled
+   templates — run it before packaging a release (`npm run deploy` runs it first, as on `main`).
+   It never guesses the version: with nothing new it just continues; with new learnings it lists
+   them and asks which FileMaker they were copied from (or skip); with no terminal it fails and
+   asks for `--fm`. `--fm <version>` skips the question. "New" = some learned template that no
+   supported version has yet, or that is richer than every version's copy.
    **Copy CONFIGURED steps when capturing for the starter set.** FM omits children whose option
    is unset, so a copy of a freshly-dragged step teaches a template with no slot for the
    parameter that matters. `xmlToText` guards against this at runtime (a leaner paste never
@@ -109,6 +117,51 @@ attr/element parsing), `lib/fmdata.js` (FM function/Get-flag data for autocomple
 Learned-template caveat: templates refill slots by parameter *label*, so a step whose meaning
 depends on child order with duplicate labels could rebuild incorrectly (none known in practice —
 but keep it in mind when touching `slotElement`/`fillTemplate`).
+
+## FileMaker version scoping
+
+The user picks a FileMaker version (`fmBridge.fileMakerVersion`, `"2025"` or `"2026"`, per
+workspace; status-bar `FM 2025` item / "FM Bridge: Select FileMaker Version"). Everything bundled
+is scoped to it, so training on a newer FileMaker can't break XML generated for an older one.
+
+```
+lib/steps.js                 conversion engine only, no step data
+lib/versions/index.js        loadVersion(): resolves a version's chain, cached
+lib/versions/base/           what every supported version has
+  builtins.js                BUILTINS + PARAM_ALIASES
+  fmdata.js                  FUNCTIONS / GET_FLAGS / EXTRA_STEP_NAMES (autocomplete)
+  templates.json             bundled starter templates
+lib/versions/2025/           version.json, plus only what FM 2025 changes (nothing yet)
+lib/versions/2026/           version.json, plus only what FM 2026 changes (nothing yet)
+```
+
+- Chain: `base → 2025 → 2026`. Each layer's `builtins.js` / `fmdata.js` / `templates.json` is
+  optional and holds only its own additions or replacements; a missing file means no changes.
+  FM 2026 extends FM 2025 (not base) so anything fixed for FM 2025 reaches FM 2026 too.
+- **base = what every supported version has.** Everything so far was captured from FM 2025, so it
+  all sits in base. If an older version (e.g. FM 2024) is ever added, steps it lacks (the FM 2025
+  AI/RAG steps) must move from base into `2025/`.
+- `version.json` = `{ name, major, minor, extends, removedSteps }` (base has none). `name` is the
+  release year and **must equal the folder name** (`loadLayer` throws otherwise); it is the
+  identifier used everywhere (setting, `--fm`, `extends`). `major`/`minor`
+  are Claris's internal numbers (FM 2025 = 22, what `Get ( ApplicationVersion )` reports), kept
+  as metadata only — never in folder or file names. User-visible text always says "FM 2025" / "FM 2026"
+  (`label()`), never a bare "25"/"26" or the internal major number.
+- Converters take built-ins and labels from the store (`store.builtins`, `store.paramAliases`,
+  built from `loadVersion()`) and throw without them — there is deliberately no fallback, since
+  `base/builtins.js` requires helpers from `lib/steps.js` (`require('lib/steps').helpers`).
+- Workspace learnings (`.fmbridge/templates.json`) are **not** version-scoped: the clipboard XML
+  doesn't say which FileMaker produced it, so there is no honest way to file a paste under a
+  version. A workspace template always wins over the selected version's bundled one, as before
+  versioning — so a project that learned a step locally keeps using its own copy even after a
+  release ships a pre-trained one (delete the entry to pick up the shipped one).
+- `unavailableSteps(name)` lists steps only another version has; `textToXml` reports those as
+  "not available in FM 2025 (it exists in FM 2026)" instead of "unrecognized step".
+- `npm run sync-templates` (its prompt, or `--fm <name>`) is where a maintainer decides which version a learning
+  belongs to. It writes only the differences from the inherited set into that version's
+  `templates.json` (creating the file if needed), with the same richer-wins rule.
+- Only add a per-version built-in once a real copy from that FileMaker shows the step's XML
+  changed — never guess.
 
 ## Clipboard access (platform-specific, both directions)
 
@@ -228,8 +281,10 @@ and punctuation already resolve above, so what is left is a real typo).
 
 `npm test` runs `test/roundtrip.test.js` in plain Node (no VS Code): text → XML → text → XML on
 `test/fixtures/sample.fmscript` (a real 26-step production script) with
-`test/fixtures/templates.json`, asserting stability (canonical text and XML are fixed points),
-zero errors, and step-count preservation. The historical bar for converter changes is: round-trip
+`test/fixtures/templates.json` and FM 2025's built-ins, asserting stability (canonical text and
+XML are fixed points), zero errors, and step-count preservation. It also checks authoring against
+the bundled FM 2025 set and the version scoping (inheritance, "not available" errors, per-version
+and built-in/label overrides). The historical bar for converter changes is: round-trip
 must be stable AND the rebuilt XML should pass the `validate_fmxmlsnippet` KiBuild MCP tool
 (available in FileMaker project workspaces). The ultimate test is a real paste into FileMaker's
 Script Workspace — schema guesses that were never verified against a real FM copy have been wrong

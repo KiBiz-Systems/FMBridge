@@ -22,6 +22,9 @@ each platform.
 - **Trained on FileMaker Pro 2025.** 216 script steps work out of the box, all captured from
   real FileMaker copies. FM Bridge also learns new steps from a single copy (see
   [Training](#train-it-on-your-scripts)).
+- **Matches your FileMaker version.** Pick FM 2025 or FM 2026 and FM Bridge uses the steps,
+  functions and step formats for that version (see
+  [Choosing your FileMaker version](#choosing-your-filemaker-version)).
 - **Nothing is ever lost.** Any step it can't model as text still round-trips byte-for-byte.
 
 ## Built for KiBuild: about 50% less development time
@@ -124,7 +127,7 @@ pastes back byte-identical. The only cost is that you cannot edit that step's in
 2. **Learned templates** — any other step whose XML children are simple shapes (calculations,
    state flags, typed values, attribute tags, field references, nested containers) is learned
    automatically the first time you paste it *from* FileMaker, then reused when converting text
-   back to XML. 192 such templates ship pre-learned in `lib/starter-templates.json`; anything you
+   back to XML. 192 such templates ship pre-learned in `lib/versions/base/templates.json`; anything you
    learn locally is cached in `.fmbridge/templates.json` in your workspace and overrides the
    bundled set.
 
@@ -139,13 +142,34 @@ pastes back byte-identical. The only cost is that you cannot edit that step's in
    criteria, `Go to Layout`, saved sort orders, print setups) become `#fmxml <Step …>` lines, or
    `#fmxml64 Name <base64>` when the XML spans multiple lines.
 
+## Choosing your FileMaker version
+
+FM Bridge keeps its pre-trained steps, built-in steps and autocomplete data per FileMaker
+version, so steps trained on a newer FileMaker never change the XML generated for an older one.
+
+Pick the version you work in from the **`FM 2025`** item in the status bar (shown while a
+`.fmscript` file is open), the **FM Bridge: Select FileMaker Version** command, or the
+`fmBridge.fileMakerVersion` setting. The choice is saved per workspace, so each project can target
+its own version. FM 2025 is the default.
+
+| | FM 2025 | FM 2026 |
+|---|---|---|
+| Pre-trained steps | captured from FileMaker Pro 2025 | everything in FM 2025, plus FM 2026's own additions and changes as they're captured |
+
+Writing a step that only another version has gives a clear error, for example
+`"…" is not available in FM 2025 (it exists in FM 2026)`.
+
 ### Steps introduced in newer FileMaker versions
 
-FM Bridge is not pinned to a FileMaker version. It reads whatever `FMXMLSNIPPET` your copy of
-FileMaker produces, so steps added in v22 or later — including AI/RAG steps such as
-`Configure AI Account` and `Perform Semantic Find` — are learned from a single copy and become
-authorable, with no update to this extension required. Steps too complex to model still
-round-trip losslessly via passthrough.
+You don't have to wait for a release to use a new step. FM Bridge reads whatever `FMXMLSNIPPET`
+your FileMaker produces, so a step it hasn't seen is learned from a single copy (see
+[Training](#train-it-on-your-scripts)) and becomes authorable straight away. Steps too complex to
+model still round-trip losslessly via passthrough.
+
+Steps you learn this way are saved in your project and work whichever version is selected — the
+clipboard doesn't say which FileMaker it came from. Your own copy of a step always takes
+precedence over a pre-trained one, including after a later release adds pre-trained steps for
+your version; delete the step from `.fmbridge/templates.json` to use the pre-trained one instead.
 
 ## Train it on your scripts
 
@@ -229,7 +253,7 @@ requirement (`vsce` is fetched on demand via `npx`).
 
 ```sh
 npm test                 # round-trip stability check (text → XML → text → XML)
-npm run sync-templates   # fold locally learned templates into the bundled starter set
+npm run sync-templates   # fold locally learned templates into a version's bundled set (asks which)
 npm run package          # build fm-bridge-<version>.vsix
 npm run install-ide      # install the newest .vsix (Windows, PowerShell)
 npm run install-ide:mac  # install the newest .vsix (macOS/Linux)
@@ -252,6 +276,9 @@ children it does not recognise, leaving a step that looks fine but has empty par
 
 - A step that is neither built-in nor learned cannot be *authored* from scratch — copy one
   instance from FileMaker first so its template is learned.
+- Steps learned in a project aren't tied to a FileMaker version, because FileMaker's clipboard
+  doesn't say which version it came from. A step copied from FileMaker 2026 is usable while FM 2025
+  is selected; check it pastes correctly into FileMaker 2025 before relying on it.
 - Learned templates refill slots by parameter *label*, so a step whose meaning depends on child
   *order* with duplicate labels could rebuild incorrectly. None are known in practice.
 - `Perform Find [ Restore ]` and saved sort orders cannot be reconstructed from text; they

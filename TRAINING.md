@@ -29,7 +29,7 @@ captured from an actual FileMaker copy, not written by hand.
 | | Steps | What it means |
 |---|---|---|
 | Built-in formatters | 26 | Hand-verified control-flow and data steps (`Set Variable`, `If`, `Loop`, `Perform Script` …) |
-| Pre-trained templates | 192 | Captured from FileMaker 2025 and bundled in `lib/starter-templates.json` |
+| Pre-trained templates | 192 | Captured from FileMaker 2025 and bundled in `lib/versions/base/templates.json` |
 | **Ready to write from scratch** | **216** | No training needed |
 
 Anything else still round-trips safely as a raw `#fmxml` line. You just can't edit it as text
@@ -173,7 +173,8 @@ FileMaker version** than the one the bundled set was captured from.
 ```sh
 # in a clone of this repository
 cp /path/to/your-project/.fmbridge/templates.json .fmbridge/templates.json
-npm run sync-templates   # merges into lib/starter-templates.json, never losing richer templates
+npm run sync-templates   # asks which FileMaker the steps came from, then merges into
+                         # lib/versions/<version>/templates.json, never losing richer templates
 npm test                 # round-trip check must stay green
 ```
 
@@ -185,10 +186,10 @@ it kept, so a lean capture can't downgrade a shipped one.
 
 | Improvement | Where | Effort |
 |---|---|---|
-| **Add new step names to autocomplete.** Steps from a new FileMaker version that aren't learned yet. | `EXTRA_STEP_NAMES` in `lib/fmdata.js` | A few minutes |
-| **Add new calculation functions and `Get ( )` flags.** Claris adds some in most releases. | `FUNCTIONS` and `GET_FLAGS` in `lib/fmdata.js` | A few minutes |
-| **Teach FileMaker's display labels.** When Script Workspace shows a label that differs from the XML tag (it shows `With dialog: Off` where the XML says `NoInteract`), map it so people can type what they see. | `PARAM_ALIASES` in `lib/steps.js` | Under an hour |
-| **Promote a heavily used step to a built-in.** It gets a cleaner text form and is verified by hand. | `BUILTINS` in `lib/steps.js` | Half a day, with testing |
+| **Add new step names to autocomplete.** Steps from a new FileMaker version that aren't learned yet. | `EXTRA_STEP_NAMES` in `lib/versions/<version>/fmdata.js` | A few minutes |
+| **Add new calculation functions and `Get ( )` flags.** Claris adds some in most releases. | `FUNCTIONS` and `GET_FLAGS` in `lib/versions/<version>/fmdata.js` | A few minutes |
+| **Teach FileMaker's display labels.** When Script Workspace shows a label that differs from the XML tag (it shows `With dialog: Off` where the XML says `NoInteract`), map it so people can type what they see. | `PARAM_ALIASES` in `lib/versions/base/builtins.js` | Under an hour |
+| **Promote a heavily used step to a built-in.** It gets a cleaner text form and is verified by hand. | `BUILTINS` in `lib/versions/base/builtins.js` | Half a day, with testing |
 | **Turn a passthrough step into editable text.** For a step that currently falls back to `#fmxml`. | `lib/steps.js` | Varies |
 
 Ground rules for code changes:

@@ -10,6 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 const { xmlToText, textToXml } = require('../lib/steps');
+const versions = require('../lib/versions');
 
 const fixtureDir = path.join(__dirname, 'fixtures');
 const templates = JSON.parse(fs.readFileSync(path.join(fixtureDir, 'templates.json'), 'utf8'));
@@ -24,7 +25,8 @@ function check(label, ok, detail) {
 
 console.log('round-trip: ' + path.basename(scriptPath));
 
-const store = { templates };
+const fm2025 = versions.loadVersion('2025');
+const store = { builtins: fm2025.builtins, paramAliases: fm2025.paramAliases, templates };
 
 const r1 = textToXml(text0, store);
 check('text -> xml: no errors', r1.errors.length === 0, r1.errors.join('; '));
@@ -51,8 +53,7 @@ check('fmxmlsnippet wrapper', /^<fmxmlsnippet type="FMObjectList">[\s\S]*<\/fmxm
 // whose only difference is capitalization.
 
 console.log('\nauthoring from starter templates');
-const starter = { templates: JSON.parse(fs.readFileSync(
-  path.join(__dirname, '..', 'lib', 'starter-templates.json'), 'utf8')) };
+const starter = { builtins: fm2025.builtins, paramAliases: fm2025.paramAliases, templates: fm2025.templates };
 
 function authors(label, line, mustContain) {
   const r = textToXml(line, starter);
@@ -119,6 +120,51 @@ const bogus = textToXml('Allow User Abort [ Wibble: On ]', starter);
 check('unknown labeled parameter is reported',
   bogus.errors.length === 1 && /unknown parameter "Wibble"/.test(bogus.errors[0]),
   bogus.errors.join('; '));
+
+// --- FileMaker version scoping ------------------------------------------------
+
+console.log('\nFileMaker version scoping');
+for (const name of versions.VERSIONS) {
+  const v = versions.loadVersion(name);
+  check('FM ' + name + ' loads templates and autocomplete data',
+    Object.keys(v.templates).length > 0 && v.functions.length > 0 && v.extraStepNames.length > 0);
+  if (v.extends) {
+    const parent = versions.loadLayer(v.extends).templates;
+    const lost = Object.keys(parent).filter((n) => !v.templates[n]);
+    const from = v.extends === versions.BASE ? 'base' : 'FM ' + v.extends;
+    check('FM ' + name + ' inherits ' + from + "'s templates",
+      lost.length === 0, 'missing: ' + lost.join(', '));
+  }
+}
+check('unknown FileMaker version is refused', (() => {
+  try { versions.loadVersion('19'); return false; } catch (e) { return true; }
+})());
+
+const scoped = Object.assign({}, starter, { version: '2025',
+  unavailable: { 'Configure Future Thing': ['2026'] } });
+const future = textToXml('configure future thing [ On ]', scoped);
+check('step from another version names the version it needs',
+  future.errors.length === 1 && /not available in FM 2025 \(it exists in FM 2026\)/.test(future.errors[0]),
+  future.errors.join('; '));
+const learnedAnyway = textToXml('Allow User Abort [ Off ]',
+  Object.assign({}, starter, { version: '2025', unavailable: { 'Allow User Abort': ['2026'] } }));
+check('a step this version knows is never blocked', learnedAnyway.errors.length === 0, learnedAnyway.errors.join('; '));
+
+const { BUILTINS, PARAM_ALIASES } = require('../lib/versions/base/builtins');
+const overridden = { version: '2026', templates: starter.templates,
+  builtins: Object.assign({}, BUILTINS, { 'Set Error Capture': {
+    toText: () => 'On', toXml: () => '<NewShape state="True"/>' } }),
+  paramAliases: Object.assign({}, PARAM_ALIASES, { NoInteract: [{ label: 'Silently' }] }) };
+check('per-version built-in is used for that version',
+  textToXml('Set Error Capture [ On ]', overridden).xml.indexOf('<NewShape state="True"/>') !== -1);
+check('per-version display label is used for that version',
+  textToXml('Insert from URL [ Silently: On ; URL: "https://x" ]', overridden).xml.indexOf('<NoInteract state="True"/>') !== -1);
+check('display label replaced in that version is gone there',
+  textToXml('Insert from URL [ With dialog: Off ; URL: "https://x" ]', overridden).errors.length === 1);
+check('FM 2025 built-ins are the base set', versions.loadVersion('2025').builtins['Set Variable'] === BUILTINS['Set Variable']);
+check('converters refuse a store without built-ins', (() => {
+  try { textToXml('Beep', { templates: {} }); return false; } catch (e) { return /builtins/.test(e.message); }
+})());
 
 if (failures) {
   console.error('\n' + failures + ' check(s) failed');
