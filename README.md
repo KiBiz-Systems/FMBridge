@@ -6,36 +6,41 @@ hand or with an AI assistant — then paste them straight back.
 
 No server, no account, no telemetry, no runtime dependencies. Everything runs locally.
 
-**Works on Windows and macOS from the same build.** Both clipboard directions are verified
-against FileMaker Pro on each platform.
+**Works on Windows and macOS.** Both clipboard directions are verified against FileMaker Pro on
+each platform.
 
 ## Install
 
-Download the latest build — [**fm-bridge.vsix**](https://github.com/KiBiz-Systems/FMBridge/releases/latest/download/fm-bridge.vsix)
-— and install it with your editor's CLI:
+Download the build for your platform:
+
+| Platform | Download |
+| --- | --- |
+| macOS | [**fm-bridge-mac.vsix**](https://github.com/KiBiz-Systems/FMBridge/releases/latest/download/fm-bridge-mac.vsix) |
+| Windows | [**fm-bridge-windows.vsix**](https://github.com/KiBiz-Systems/FMBridge/releases/latest/download/fm-bridge-windows.vsix) |
+
+Then install it with your editor's CLI (shown for macOS — use `fm-bridge-windows.vsix` on Windows):
 
 ```sh
-curl -LO https://github.com/KiBiz-Systems/FMBridge/releases/latest/download/fm-bridge.vsix
+curl -LO https://github.com/KiBiz-Systems/FMBridge/releases/latest/download/fm-bridge-mac.vsix
 
 # VS Code
-code --install-extension fm-bridge.vsix
+code --install-extension fm-bridge-mac.vsix
 
 # Antigravity IDE
-antigravity-ide --install-extension fm-bridge.vsix
+antigravity-ide --install-extension fm-bridge-mac.vsix
 
 # Cursor / VSCodium / Windsurf and other forks
-cursor --install-extension fm-bridge.vsix
+cursor --install-extension fm-bridge-mac.vsix
 ```
 
 Or from the editor UI: **Extensions** view → `…` menu → **Install from VSIX…**
 
-That download link always serves the newest release. Earlier builds, and what changed in each,
+Those download links always serve the current release. Earlier builds, and what changed in each,
 are on the [releases page](https://github.com/KiBiz-Systems/FMBridge/releases).
 
 Then run **Developer: Reload Window**. This step is required — installing a `.vsix` does not
 hot-swap an extension that is already running.
 
-The same file installs on Windows and macOS; platform differences are handled at runtime.
 Coverage for 216 script steps is bundled in, so it works immediately with no setup.
 
 > **Requirements:** VS Code 1.80+ (or any fork at that API level) and FileMaker Pro. Node.js is
