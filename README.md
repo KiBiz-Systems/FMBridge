@@ -1,13 +1,43 @@
 # FM Bridge — FileMaker Script ⇄ Text
 
-A local VS Code extension that bridges FileMaker Pro's clipboard XML (`FMXMLSNIPPET`) and
-readable `.fmscript` text. Copy script steps out of FileMaker and edit them as plain text — by
-hand or with an AI assistant — then paste them straight back.
+**Write FileMaker scripts the way you write code: as text, in your editor, with AI at your
+side. Then paste them straight back into FileMaker.**
+
+FM Bridge is a VS Code extension that turns FileMaker Pro's script steps into readable
+`.fmscript` text and back again. Copy steps out of Script Workspace, edit them by hand or with an
+AI assistant, and paste the result into FileMaker. There's no retyping and no clicking through
+step dialogs one option at a time.
 
 No server, no account, no telemetry, no runtime dependencies. Everything runs locally.
 
 **Works on Windows and macOS.** Both clipboard directions are verified against FileMaker Pro on
 each platform.
+
+## Why FM Bridge
+
+- **AI-ready FileMaker.** Claude, Copilot, Cursor and other assistants can read and write
+  FileMaker scripts as text, so you can ask for a script and paste it straight into FileMaker.
+- **Real code tooling.** You get search and replace across a whole script, multi-cursor edits,
+  version control, diffs and code review, none of which Script Workspace offers.
+- **Trained on FileMaker Pro 2025.** 216 script steps work out of the box, all captured from
+  real FileMaker copies. FM Bridge also learns new steps from a single copy (see
+  [Training](#train-it-on-your-scripts)).
+- **Nothing is ever lost.** Any step it can't model as text still round-trips byte-for-byte.
+
+## Built for KiBuild: about 50% less development time
+
+FM Bridge is the clipboard half of the AI toolkit we use every day at KiBiz Systems.
+[**KiBuild**](https://github.com/KiBiz-Systems/kibuild-mcp) is our MCP server that gives AI
+coding tools structured access to a FileMaker solution's scripts, layouts, tables and
+relationships, plus validation for generated script XML. Together they close the loop:
+
+1. **KiBuild** lets the AI understand your solution: where a field is used, what a script calls,
+   how tables relate.
+2. **The AI writes or changes scripts** as `.fmscript` text, grounded in your real schema.
+3. **FM Bridge** puts that text back into FileMaker with one shortcut.
+
+On KiBiz Systems' own FileMaker projects, pairing FM Bridge with KiBuild has **cut development
+time by around 50%**. [Get KiBuild →](https://github.com/KiBiz-Systems/kibuild-mcp)
 
 ## Install
 
@@ -117,6 +147,21 @@ FileMaker produces, so steps added in v22 or later — including AI/RAG steps su
 authorable, with no update to this extension required. Steps too complex to model still
 round-trip losslessly via passthrough.
 
+## Train it on your scripts
+
+The bundled coverage was trained on **FileMaker Pro 2025** scripts. Your own solution may use
+steps or options that set doesn't include. Training it takes about five minutes:
+
+1. Build a throwaway script in FileMaker containing every step you use, **with their options
+   configured**. FileMaker leaves unset options out of its XML, so configured steps teach more.
+2. Copy it and paste it into any `.fmscript` file with `Ctrl+Alt+V` / `Cmd+Option+V`.
+3. Every step FM Bridge could model can now be written from scratch as text.
+
+What it learns lives in `.fmbridge/templates.json`. Commit that file to share it with your team,
+or contribute it back so it ships to everyone.
+
+**[Read the full training guide →](TRAINING.md)**
+
 ## Autocomplete
 
 Available in `.fmscript` files:
@@ -217,14 +262,63 @@ children it does not recognise, leaving a step that looks fine but has empty par
   script list.
 - On Linux, pasting back into FileMaker is not supported.
 
+## What's next
+
+These are ideas we're exploring. None of them is in FM Bridge yet. If one would make a
+difference to your team, [tell us](#connect-with-kibiz-systems): demand decides what comes
+first.
+
+- **Schema-aware autocomplete.** Complete table, field, layout and script names from your actual
+  solution via KiBuild, instead of only names already used in your `.fmscript` files.
+- **Live error checking.** Red squiggles as you type for unknown steps, missing parameters,
+  unbalanced `If` / `End If` and `Loop` / `End Loop`, and field or script references that don't
+  exist in the target file.
+- **Paste a whole script, not just steps.** Create a new entry in FileMaker's script list
+  straight from a `.fmscript` file, including folders and script settings.
+- **Beyond scripts.** Two-way conversion for custom functions, tables, fields and value lists,
+  which FileMaker also exchanges through its clipboard.
+- **Editable find and sort criteria.** Turn `Perform Find [ Restore ]` and saved sort orders
+  into readable, editable text instead of raw XML.
+- **Hover documentation.** Signatures and descriptions for every script step and calculation
+  function, right where you type.
+- **Calculation formatter.** One keystroke to tidy indentation in long `Let`, `Case` and
+  `While` expressions.
+- **Shared team training.** A central, organisation-wide template store so a step learned by
+  one developer is instantly available to everyone.
+- **Marketplace install.** Publishing to the VS Code Marketplace and Open VSX for one-click
+  install and automatic updates.
+
+## Connect with KiBiz Systems
+
+FM Bridge is built and used in production by **KiBiz Systems**, FileMaker developers who build
+AI-assisted workflows for their own client work.
+
+**Want to get more out of it?** Whether you're rolling FM Bridge and KiBuild out across a team,
+training it on a large solution, or wondering whether AI-assisted FileMaker development fits
+your projects, we'd like to hear from you.
+
+- 💬 **Leave a message:** start a thread in
+  [KiBuild Discussions](https://github.com/KiBiz-Systems/kibuild-mcp/discussions)
+- 🌐 **Talk to us:** [contact KiBiz Systems](https://www.kibizsystems.com/contact-kibiz/)
+- 🧰 **Try the full toolkit:** [KiBuild MCP](https://github.com/KiBiz-Systems/kibuild-mcp)
+
 ## License
 
-[MIT](LICENSE) © 2026 KiBiz Systems.
+**Source-Available License — Commercial Development Permitted; Tool Resale Restricted.**
+© 2026 KiBiz Systems.
 
-Permission is granted to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the software, subject to including the copyright notice and permission notice. The
-software is provided "as is", without warranty of any kind. See [LICENSE](LICENSE) for the full
-text.
+**FM Bridge is free to download and use**, including for paid work.
+
+| ✅ You can | ❌ You can't (without written permission) |
+|---|---|
+| Use it for personal and commercial work | Sell, sublicense or rebrand FM Bridge itself |
+| Build, test, maintain and sell FileMaker solutions with it | Redistribute it commercially, including modified versions |
+| Charge for development services you deliver with it | Bundle it into a commercial toolkit, plugin package or other product |
+| Keep full ownership of the scripts and solutions you create | Ship FM Bridge or its components inside the solutions you sell |
+
+Need a use the license doesn't cover, such as bundling or reselling? Ask us first:
+[connect with KiBiz Systems](#connect-with-kibiz-systems). This summary is for convenience;
+[LICENSE](LICENSE) has the binding terms.
 
 FileMaker and Claris are trademarks of Claris International Inc. FM Bridge is an independent
 project and is not affiliated with or endorsed by Claris.

@@ -1,21 +1,60 @@
-MIT License
+FM Bridge License
+Source-Available License — Commercial Development Permitted; Tool Resale Restricted
 
-Copyright (c) 2026 Kibiz Solutions
+Copyright (c) 2026 KiBiz Systems. All rights reserved, except as granted below.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+"The tool" means FM Bridge: the software in this repository and the extension packages (.vsix)
+built from it, including its source code, bundled templates, scripts and documentation.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. Free to download and use
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+   The tool is free of charge. You may download, install and use it without paying a fee.
+
+2. Permitted use
+
+   You may use this tool for personal and commercial purposes, including developing, testing,
+   maintaining, and selling FileMaker solutions and providing paid development services.
+
+3. Restrictions
+
+   This permission does not grant the right to sell, sublicense, rebrand, or commercially
+   redistribute the tool itself, including modified versions, or to bundle it into a commercial
+   toolkit, plugin package, or other product without separate written permission.
+
+4. Solutions and services you create
+
+   You may charge for solutions and services created using the tool. Those solutions must not
+   redistribute the tool or its components except as expressly permitted by the license.
+
+   KiBiz Systems claims no ownership of the FileMaker scripts, solutions or other work you
+   create with the tool.
+
+5. Notices
+
+   Any copy of the tool you keep or share as this license permits must include this license and
+   the copyright notice above, unaltered.
+
+6. Separate written permission
+
+   To request permission for a use that sections 2 to 4 do not grant, contact KiBiz Systems at
+   https://www.kibizsystems.com/contact-kibiz/. Such permission is valid only if given in writing by KiBiz Systems.
+
+7. Termination
+
+   If you breach this license, your permission to use the tool ends automatically. Solutions you
+   created before the breach are not affected.
+
+8. No warranty
+
+   THE TOOL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+   NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+   NONINFRINGEMENT.
+
+9. Limitation of liability
+
+   IN NO EVENT SHALL KIBIZ SYSTEMS OR THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+   CONNECTION WITH THE TOOL OR THE USE OR OTHER DEALINGS IN THE TOOL.
+
+FileMaker and Claris are trademarks of Claris International Inc. FM Bridge is an independent
+project and is not affiliated with or endorsed by Claris.

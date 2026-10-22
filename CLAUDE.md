@@ -31,10 +31,19 @@ old build otherwise.
 
 Builds are **not** committed to the repo; they live on GitHub Releases.
 `.github/workflows/release.yml` runs on a `v*` tag push: it fails fast unless the tag equals
-package.json's `version`, runs `npm test`, packages, and uploads the .vsix twice — as
-`fm-bridge-<version>.vsix` (the archive copy) and as `fm-bridge.vsix`, a version-free name so
-`https://github.com/KiBiz-Systems/FMBridge/releases/latest/download/fm-bridge.vsix` always
-resolves to the newest build. README links to that URL, so a release needs no README edit.
+package.json's `version`, runs `npm test`, packages, and uploads:
+
+- `fm-bridge-<version>.vsix` — the archive copy
+- `fm-bridge-windows.vsix` — this build; README's Windows link
+- `fm-bridge.vsix` — this build; the pre-split name, kept so old links still resolve
+- `fm-bridge-mac.vsix` — **copied forward from the previous latest release**, not this build.
+  README's macOS link points here, and macOS deliberately stays on the last build verified on a
+  Mac (0.1.21 when the split was made, 2026-10-22). To move macOS to a new build, run the
+  workflow manually (`workflow_dispatch`) with the tag and `update_mac` ticked.
+
+README links to `releases/latest/download/fm-bridge-{mac,windows}.vsix`, so a release needs no
+README edit — but a release missing either file 404s that platform's link, which is why the
+workflow fails rather than publish without a Mac file to carry forward.
 
 ```
 npm run sync-templates && npm test   # fold in learnings, verify (do this BEFORE tagging)

@@ -4,10 +4,16 @@ name: Release
 #   - push a tag `v<version>` matching package.json (the normal path)
 #   - run this workflow manually from the Actions tab (re-uploads to the tag's release)
 #
-# Every release carries the build twice: `fm-bridge-<version>.vsix` for the archive, and
-# `fm-bridge.vsix` under a version-free name so this URL is always the newest build:
-#   https://github.com/KiBiz-Systems/FMBridge/releases/latest/download/fm-bridge.vsix
-# That link is what README points at — it never needs editing on a release.
+# Every release carries:
+#   fm-bridge-<version>.vsix  this build, for the archive
+#   fm-bridge-windows.vsix    this build, under the name README's Windows link uses
+#   fm-bridge.vsix            this build (pre-split name; kept so old links still resolve)
+#   fm-bridge-mac.vsix        COPIED FORWARD from the previous latest release, so macOS stays
+#                             on the last build verified on a Mac (0.1.21 at the time of the
+#                             split). To move macOS to this build, run the workflow manually
+#                             with "update_mac" ticked.
+# README links to releases/latest/download/fm-bridge-{mac,windows}.vsix, so a release never
+# needs a README edit — but it MUST carry both files, or one of those links 404s.
 
 on:
   push:
@@ -18,6 +24,10 @@ on:
       tag:
         description: 'Existing tag to build and (re)upload, e.g. v0.1.21'
         required: true
+      update_mac:
+        description: 'Also publish this build as fm-bridge-mac.vsix (only once it is verified on macOS)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -55,6 +65,24 @@ jobs:
         run: |
           npx --yes @vscode/vsce package
           cp "fm-bridge-${{ steps.v.outputs.version }}.vsix" fm-bridge.vsix
+          cp "fm-bridge-${{ steps.v.outputs.version }}.vsix" fm-bridge-windows.vsix
+
+      # Must run BEFORE publishing: once this tag's release exists it becomes "latest", and
+      # the previous Mac build would no longer be the latest release's.
+      - name: Mac build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ github.event.inputs.update_mac }}" = "true" ]; then
+            cp "fm-bridge-${{ steps.v.outputs.version }}.vsix" fm-bridge-mac.vsix
+            echo "macOS: publishing this build (${{ steps.v.outputs.version }})"
+          elif gh release download --repo "$GITHUB_REPOSITORY" -p fm-bridge-mac.vsix; then
+            MAC=$(unzip -p fm-bridge-mac.vsix extension/package.json | node -p "JSON.parse(require('fs').readFileSync(0)).version")
+            echo "macOS: carrying forward $MAC from the previous latest release"
+          else
+            echo "::error::the latest release has no fm-bridge-mac.vsix to carry forward — re-run this workflow manually with update_mac ticked to publish this build for macOS"
+            exit 1
+          fi
 
       - name: Publish release
         env:
@@ -63,11 +91,13 @@ jobs:
           TAG="${{ steps.v.outputs.tag }}"
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" \
-              "fm-bridge-${{ steps.v.outputs.version }}.vsix" fm-bridge.vsix --clobber
+              "fm-bridge-${{ steps.v.outputs.version }}.vsix" fm-bridge.vsix \
+              fm-bridge-windows.vsix fm-bridge-mac.vsix --clobber
           else
             gh release create "$TAG" \
               --title "FM Bridge ${{ steps.v.outputs.version }}" \
               --generate-notes \
               --latest \
-              "fm-bridge-${{ steps.v.outputs.version }}.vsix" fm-bridge.vsix
+              "fm-bridge-${{ steps.v.outputs.version }}.vsix" fm-bridge.vsix \
+              fm-bridge-windows.vsix fm-bridge-mac.vsix
           fi

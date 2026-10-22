@@ -4,7 +4,7 @@
   "description": "Local bridge between FileMaker's clipboard XML and readable .fmscript text: paste scripts as text (Ctrl+Alt+V), copy text back as FileMaker XML (Ctrl+Alt+B), with autocomplete for steps, functions, and your scripts. Learns step XML templates from real FileMaker copies.",
   "publisher": "kibiz",
   "version": "0.1.24",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "engines": { "vscode": "^1.80.0" },
   "categories": ["Programming Languages", "Other"],
   "keywords": ["filemaker", "fmscript", "claris", "fmp", "fmxmlsnippet"],
