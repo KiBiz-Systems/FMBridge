@@ -56,6 +56,15 @@ jobs:
           echo "tag=$TAG"         >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
+      # Tags up to v0.1.24 were cut under MIT; their published builds were relicensed by hand
+      # (2026-10-22). Rebuilding one here would publish an MIT build again, so refuse.
+      - name: Check license
+        run: |
+          if grep -q "MIT License" LICENSE || grep -q '"license": *"MIT"' package.json; then
+            echo "::error::this tag's source is still MIT-licensed — cut a new tag from main instead of rebuilding it"
+            exit 1
+          fi
+
       # Zero runtime dependencies, so there is nothing to install — but the round-trip
       # test is the gate that has caught every converter regression so far.
       - name: Test
