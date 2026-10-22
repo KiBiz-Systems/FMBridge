@@ -1,0 +1,7 @@
+{
+  "name": "2025",
+  "major": 22,
+  "minor": "0.7",
+  "extends": "base",
+  "removedSteps": []
+}

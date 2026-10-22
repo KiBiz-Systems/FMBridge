@@ -5,18 +5,20 @@ const path = require('path');
 const fs = require('fs');
 const cp = require('child_process');
 
-const { xmlToText, textToXml, BUILTINS, KEYS } = require('./lib/steps');
-const { FUNCTIONS, GET_FLAGS, EXTRA_STEP_NAMES } = require('./lib/fmdata');
+const { xmlToText, textToXml, KEYS } = require('./lib/steps');
+const versions = require('./lib/versions');
+
+// --- FileMaker version (setting fmBridge.fileMakerVersion) -------------------
+
+function fmVersion() {
+  const v = String(vscode.workspace.getConfiguration('fmBridge').get('fileMakerVersion', versions.DEFAULT_VERSION));
+  return versions.VERSIONS.includes(v) ? v : versions.DEFAULT_VERSION;
+}
 
 // --- template store (workspace .fmbridge/templates.json) --------------------
 
-// Pre-learned templates bundled with the extension (lib/starter-templates.json,
-// captured from real FileMaker pastes). Workspace-learned templates override them.
-let STARTER_TEMPLATES = {};
-try {
-  STARTER_TEMPLATES = require('./lib/starter-templates.json');
-} catch (e) { /* optional — extension still works without the starter set */ }
-
+// Learned templates are not version-scoped: the clipboard doesn't say which
+// FileMaker a paste came from. Only the bundled data (lib/versions) is.
 function storePath() {
   const ws = vscode.workspace.workspaceFolders;
   if (!ws || !ws.length) return null;
@@ -24,8 +26,19 @@ function storePath() {
 }
 
 function loadStore() {
+  const name = fmVersion();
   const p = storePath();
-  const store = { templates: Object.assign({}, STARTER_TEMPLATES), dirty: false };
+  // Bundled starter templates, built-ins and display labels for this version
+  // (captured from real FileMaker pastes); workspace-learned templates override them.
+  const fm = versions.loadVersion(name);
+  const store = {
+    version: name,
+    templates: Object.assign({}, fm.templates),
+    builtins: fm.builtins,
+    paramAliases: fm.paramAliases,
+    unavailable: versions.unavailableSteps(name),
+    dirty: false,
+  };
   if (p && fs.existsSync(p)) {
     try {
       Object.assign(store.templates, JSON.parse(fs.readFileSync(p, 'utf8')));
@@ -42,9 +55,10 @@ function saveStore(store) {
   if (!p) return;
   // Persist only what differs from the bundled starter set, so workspace
   // templates.json stays a diff, not a copy of everything shipped.
+  const starter = versions.loadVersion(store.version).templates;
   const own = {};
   for (const name of Object.keys(store.templates)) {
-    if (JSON.stringify(store.templates[name]) !== JSON.stringify(STARTER_TEMPLATES[name])) {
+    if (JSON.stringify(store.templates[name]) !== JSON.stringify(starter[name])) {
       own[name] = store.templates[name];
     }
   }
@@ -226,7 +240,7 @@ async function copyAsFileMakerXml(context) {
         'the XML is on the clipboard as text, which FileMaker for Windows will not paste)';
     }
   }
-  const msg = 'FM Bridge: ' + stepCount + ' steps copied as FileMaker XML - ' +
+  const msg = 'FM Bridge: ' + stepCount + ' steps copied as ' + versions.label(store.version) + ' XML - ' +
     'switch to Script Workspace and paste (' + KEYS.fmPaste + ').' + warning;
   if (warning) vscode.window.showWarningMessage(msg);
   else vscode.window.showInformationMessage(msg);
@@ -241,13 +255,14 @@ function buildCompletionProvider() {
       const line = document.lineAt(position).text;
       const before = line.slice(0, position.character);
       const atLineStart = /^\s*(\/\/\s*)?[\w/ -]*$/.test(before);
+      const store = loadStore();
+      const fm = versions.loadVersion(store.version);
 
       if (atLineStart) {
-        const store = loadStore();
         const templateNames = Object.keys(store.templates || {});
-        const builtinNames = Object.keys(BUILTINS);
+        const builtinNames = Object.keys(store.builtins);
         const seen = new Set();
-        for (const name of [...builtinNames, ...templateNames, ...EXTRA_STEP_NAMES]) {
+        for (const name of [...builtinNames, ...templateNames, ...fm.extraStepNames]) {
           if (seen.has(name)) continue;
           seen.add(name);
           const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Keyword);
@@ -267,7 +282,7 @@ function buildCompletionProvider() {
       }
 
       // Calculation functions
-      for (const sig of FUNCTIONS) {
+      for (const sig of fm.functions) {
         const name = sig.split(' (')[0];
         const item = new vscode.CompletionItem(name, vscode.CompletionItemKind.Function);
         item.detail = sig;
@@ -275,7 +290,7 @@ function buildCompletionProvider() {
         item.sortText = '2' + name;
         items.push(item);
       }
-      for (const flag of GET_FLAGS) {
+      for (const flag of fm.getFlags) {
         const expr = 'Get ( ' + flag + ' )';
         const item = new vscode.CompletionItem(expr, vscode.CompletionItemKind.Constant);
         item.filterText = 'Get' + flag + ' ' + expr;
@@ -377,14 +392,49 @@ function updateSealedFolds(editor) {
   editor.setDecorations(sealedFold, decos);
 }
 
+// --- FileMaker version picker (status bar) ----------------------------------------
+
+const versionItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+versionItem.command = 'fmBridge.selectFileMakerVersion';
+versionItem.tooltip = 'FileMaker version FM Bridge targets - click to change';
+
+function updateVersionItem(editor) {
+  versionItem.text = 'FM ' + fmVersion();
+  if (editor && editor.document.languageId === 'fmscript') versionItem.show();
+  else versionItem.hide();
+}
+
+async function selectFileMakerVersion() {
+  const current = fmVersion();
+  const picked = await vscode.window.showQuickPick(versions.VERSIONS.map((name) => {
+    const v = versions.loadVersion(name);
+    return {
+      label: versions.label(name),
+      description: [name === current ? 'current' : null,
+        v.minor != null ? 'captured from ' + v.major + '.' + v.minor : null].filter(Boolean).join(' - '),
+      name,
+    };
+  }), { placeHolder: 'FileMaker version this workspace targets' });
+  if (!picked || picked.name === current) return;
+  const target = vscode.workspace.workspaceFolders
+    ? vscode.ConfigurationTarget.Workspace : vscode.ConfigurationTarget.Global;
+  await vscode.workspace.getConfiguration('fmBridge').update('fileMakerVersion', picked.name, target);
+}
+
 // --- activation --------------------------------------------------------------------
 
 function activate(context) {
   context.subscriptions.push(
+    versionItem,
     vscode.commands.registerCommand('fmBridge.pasteFromFileMaker', () => pasteFromFileMaker(context)),
     vscode.commands.registerCommand('fmBridge.copyAsFileMakerXml', () => copyAsFileMakerXml(context)),
     vscode.commands.registerCommand('fmBridge.dumpClipboardDebug', () => dumpClipboardDebug(context)),
+    vscode.commands.registerCommand('fmBridge.selectFileMakerVersion', selectFileMakerVersion),
     vscode.languages.registerCompletionItemProvider({ language: 'fmscript' }, buildCompletionProvider()),
+    vscode.window.onDidChangeActiveTextEditor(updateVersionItem),
+    vscode.workspace.onDidChangeConfiguration((e) => {
+      if (e.affectsConfiguration('fmBridge.fileMakerVersion')) updateVersionItem(vscode.window.activeTextEditor);
+    }),
     vscode.window.onDidChangeActiveTextEditor(updateSealedFolds),
     vscode.window.onDidChangeTextEditorSelection((e) => updateSealedFolds(e.textEditor)),
     vscode.workspace.onDidChangeTextDocument((e) => {
@@ -393,6 +443,7 @@ function activate(context) {
     })
   );
   vscode.window.visibleTextEditors.forEach(updateSealedFolds);
+  updateVersionItem(vscode.window.activeTextEditor);
 }
 
 function deactivate() {}
